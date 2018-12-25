@@ -8,15 +8,15 @@ RSpec.describe DeviseHelper, type: :helper do
       context '空入力の場合' do
         it 'エラーメッセージがあること' do
           resource.update(email: '', password: '')
-          expect(devise_error_messages!).to include('Email can&#39;t be blank')
-          expect(devise_error_messages!).to include('Password can&#39;t be blank')
+          expect(devise_error_messages!).to include('メールアドレス が記入されていません。')
+          expect(devise_error_messages!).to include('パスワード が記入されていません。')
         end
       end
 
       context 'メールフォーマットが不正な場合' do
         it 'エラーメッセージがあること' do
           resource.update(email: 'abc@')
-          expect(devise_error_messages!).to include('Email is invalid')
+          expect(devise_error_messages!).to include('メールアドレス が不正な値です。')
         end
       end
 
@@ -24,7 +24,7 @@ RSpec.describe DeviseHelper, type: :helper do
         it 'エラーメッセージがあること' do
           text = 'a' * 5
           resource.update(password: text)
-          expect(devise_error_messages!).to include('Password is too short (minimum is 6 characters)')
+          expect(devise_error_messages!).to include('パスワード は6文字以上で記入してください。')
         end
       end
     end

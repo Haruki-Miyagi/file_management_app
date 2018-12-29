@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <h2 class='text-center'>登録ページ</h2>
+    <br/>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: 'form-control' %>
+      </div>
+      <hr/>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class: 'btn btn-primary btn-sm form-control' %>
+      </div>
+    <% end %>
+  </div>
+</div>

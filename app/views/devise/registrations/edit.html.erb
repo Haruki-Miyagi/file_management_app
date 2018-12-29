@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+  <h2 class='text-center'>アカウント編集</h2>
+  <br/>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: 'form-control' %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password, '変更パスワードを入力してください' %> <i> (変更したくない場合は未記入) </i><br />
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password", class: 'form-control'  %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, '変更パスワードの確認' %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+      <span style='color: red; font-weight: bold;'>[確認用]</span>
+        <%= f.label :password_confirmation, '現在のパスワードを入力してください' %><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", class: 'form-control' %>
+      </div>
+      <hr/>
+
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-primary btn-sm form-control' %>
+      </div>
+    <% end %>
+  </div>
+</div>

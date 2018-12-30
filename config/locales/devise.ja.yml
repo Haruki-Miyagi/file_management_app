@@ -7,6 +7,7 @@ ja:
 
   devise:
     failure:
+      already_authenticated: "既にログインしています。"
       unauthenticated: 'ログインしてください。'
       unconfirmed: '本登録を行ってください。'
       locked: 'あなたのアカウントは凍結されています。'

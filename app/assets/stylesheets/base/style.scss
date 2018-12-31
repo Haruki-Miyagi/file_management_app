@@ -9,8 +9,9 @@ body {
 // toastrのスタイリング
 // https://github.com/tylergannon/toastr-rails
 // -----------------------------------
+
 .toast-error {
-  background-color: #333333	;
+  background-color: #333333 !important;
   border-bottom: inset 3px #FFFFCC;
 }
 

@@ -1,0 +1,167 @@
+#l-side-nav {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+// -----------------------------------
+// 基本の左サイドバーのスタイル
+// -----------------------------------
+#l-side-aside {
+  margin: 50px 0 0 0;
+  padding-top: 70px;
+  padding-bottom: 40px;
+  width: 20%;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+}
+
+@media screen and (max-width: 1200px) {
+  #l-side-aside {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 767px) {
+  #l-side-aside {
+    width: 270px;
+    transform: translateX(-270px);
+  }
+}
+
+#l-side-aside #l-side-main-menu ul {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#l-side-aside #l-side-main-menu ul li {
+  margin: 0 0 20px 0;
+  padding: 0;
+  list-style: none;
+}
+#l-side-aside #l-side-main-menu ul li a {
+  color: rgba(0, 0, 0, 0.9);
+  text-decoration: none;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
+  position: relative;
+  padding: 10px 10px;
+  letter-spacing: .2em;
+  font-family: "Roboto", Arial;
+  transition: 0.3s;
+}
+#l-side-aside #l-side-main-menu ul li a:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  bottom: 7px;
+  left: 10px;
+  right: 10px;
+  background-color: #929292;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#l-side-aside #l-side-main-menu ul li a:hover:after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+// -----------------------------------
+// 開いたときの左サイドバーの調整
+// -----------------------------------
+body.offcanvas #l-side-aside {
+  transform: translateX(0);
+  width: 230px;
+  background: #fff;
+  z-index: 999;
+  position: fixed;
+}
+body.offcanvas .l-side-nav-toggle {
+  transform: translateX(230px);
+}
+
+.l-side-nav-toggle {
+  cursor: pointer;
+  text-decoration: none;
+}
+.l-side-nav-toggle.active i::before, .l-side-nav-toggle.active i::after {
+  background: #000;
+}
+.l-side-nav-toggle i {
+  position: relative;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 30px;
+  height: 2px;
+  color: #000;
+  font: bold 14px/.4 Helvetica;
+  text-transform: uppercase;
+  text-indent: -55px;
+  background: #000;
+  transition: all .2s ease-out;
+}
+.l-side-nav-toggle i::before, .l-side-nav-toggle i::after {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background: #000;
+  position: absolute;
+  left: 0;
+  transition: 0.2s;
+}
+
+// -----------------------------------
+// × の位置やアクションの調整
+// -----------------------------------
+.l-side-nav-toggle i::before {
+  top: -7px;
+}
+
+.l-side-nav-toggle i::after {
+  bottom: -7px;
+}
+
+.l-side-nav-toggle:hover i::before {
+  top: -10px;
+}
+
+.l-side-nav-toggle:hover i::after {
+  bottom: -10px;
+}
+
+.l-side-nav-toggle.active i {
+  background: transparent;
+}
+
+.l-side-nav-toggle.active i::before {
+  top: 0;
+  transform: rotateZ(45deg);
+}
+
+.l-side-nav-toggle.active i::after {
+  bottom: 0;
+  transform: rotateZ(-45deg);
+}
+
+.l-side-nav-toggle {
+  position: fixed;
+  left: 0;
+  z-index: 9999;
+  cursor: pointer;
+  opacity: 1;
+  visibility: hidden;
+  padding: 20px;
+  transition: 0.5s;
+}
+@media screen and (max-width: 767px) {
+  .l-side-nav-toggle {
+    opacity: 1;
+    visibility: visible;
+  }
+}

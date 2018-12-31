@@ -4,3 +4,17 @@ body {
   background-color: #F8F8F8;
   font-family: "Varela Round", "Helventica Nenue", "Helventica";
 }
+
+// -----------------------------------
+// toastrのスタイリング
+// https://github.com/tylergannon/toastr-rails
+// -----------------------------------
+
+.toast-error {
+  background-color: #333333 !important;
+  border-bottom: inset 3px #FFFFCC;
+}
+
+.toast-info {
+  border-bottom: inset 3px #FFFFCC;
+}

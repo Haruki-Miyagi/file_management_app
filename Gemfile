@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'toastr-rails'
 
+# folder階層化gem[https://github.com/stefankroes/ancestry]
+gem 'ancestry'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

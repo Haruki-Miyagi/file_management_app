@@ -15,4 +15,8 @@ RSpec.describe User, type: :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of(:email) }
   end
+
+  describe 'association' do
+    it { is_expected.to have_many(:folders).class_name('Folder') }
+  end
 end

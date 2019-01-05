@@ -1,0 +1,23 @@
+<h1 style='margin: 20px 20px 20px 100px;'>Folders - <strong>Name:</strong><%= @folder.name %></h1>
+
+<div class='col-sm-11'>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style='text-align: center;'>ファイル名</th>
+        <th style='text-align: center;'>備考</th>
+      </tr>
+    </thead>
+    <% @folder.children.each do |folder| %>
+      <tbody>
+        <tr>
+          <td><%= link_to folder.name, folder %></td>
+          <td><%= folder.description %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
+
+<div class='col-sm-1'>
+</div>

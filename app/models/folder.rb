@@ -3,4 +3,9 @@ class Folder < ApplicationRecord
 
   has_ancestry
   belongs_to :user
+
+  # ルートフォルダを返す
+  def self.summit
+    find_by(name: 'Root')
+  end
 end

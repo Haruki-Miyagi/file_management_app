@@ -1,6 +1,10 @@
 class FoldersController < ApplicationController
   before_action :set_folder, only: [:show]
 
+  def index
+    @folder = Folder.summit
+  end
+
   def show; end
 
   private

@@ -1,0 +1,18 @@
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class='text-center'>ファイル名</th>
+        <th class='text-center'>備考</th>
+      </tr>
+    </thead>
+    <% @folder.children.each do |folder| %>
+      <tbody>
+        <tr>
+          <td><%= link_to folder.name, folder %></td>
+          <td><%= folder.description %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>

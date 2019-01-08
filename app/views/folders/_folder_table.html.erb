@@ -6,10 +6,15 @@
         <th class='text-center'>備考</th>
       </tr>
     </thead>
-    <% @folder.children.each do |folder| %>
+    <% base_folder.children.each do |folder| %>
       <tbody>
         <tr>
-          <td><%= link_to folder.name, folder %></td>
+          <td>
+            <%= link_to folder do %>
+              <i class='glyphicon glyphicon-folder-close glyphicon-icon-color'></i>
+              <%= folder.name %>
+            <% end %>
+          </td>
           <td><%= folder.description %></td>
         </tr>
       </tbody>

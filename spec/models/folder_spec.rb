@@ -13,4 +13,13 @@ RSpec.describe Folder, type: :model do
   describe 'association' do
     it { is_expected.to belong_to(:user).class_name('User') }
   end
+
+  describe 'summit' do
+    context 'Rootフォルダが作成済みである場合' do
+      it 'Rootフォルダのインスタンスが返されること' do
+        root = create(:folder, name: 'Root', description: 'Root Folder')
+        expect(subject.class.summit).to eq(root)
+      end
+    end
+  end
 end

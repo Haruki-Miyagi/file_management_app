@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'folders/index.html.erb', type: :view do
   let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
-  let(:folder) { create(:folder, parent_id: root.id) }
-  let!(:resources) { create_list(:folder, 2, parent_id: folder.id) }
+  let!(:resources) { create_list(:folder, 2, parent_id: root.id) }
 
   before do
     assign(:resources, resources)

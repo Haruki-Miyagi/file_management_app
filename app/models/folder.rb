@@ -8,6 +8,6 @@ class Folder < ApplicationRecord
 
   # ルートフォルダを返す
   def self.summit
-    find_by(name: 'Root')
+    find_by(name: 'Root', ancestry: nil)
   end
 end

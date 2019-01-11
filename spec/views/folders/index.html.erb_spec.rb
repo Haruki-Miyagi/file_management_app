@@ -6,7 +6,7 @@ RSpec.describe 'folders/index.html.erb', type: :view do
   let!(:resources) { create_list(:folder, 2, parent_id: folder.id) }
 
   before do
-    assign(:folder, folder)
+    assign(:resources, resources)
     render
   end
 

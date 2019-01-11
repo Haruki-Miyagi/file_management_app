@@ -1,15 +1,12 @@
 class FoldersController < ApplicationController
-  before_action :resource_folder, only: [:show]
+  include CrudActionsMixin
 
   def index
-    @folder = Folder.summit
+    @root_folder = Folder.summit
+    @resources = @root_folder.children.order_by_preference
   end
 
-  def show; end
-
-  private
-
-  def resource_folder
-    @folder = Folder.find(params[:id])
+  def show
+    @resources = @resource.children.order_by_preference
   end
 end

@@ -19,6 +19,9 @@ RSpec.describe FoldersController, type: :controller do
   end
 
   describe 'GET #index' do
+    let!(:folder01) { create(:folder, parent_id: root.id) }
+    let!(:folder02) { create(:folder, parent_id: root.id) }
+
     def do_render
       get :index
     end
@@ -31,9 +34,14 @@ RSpec.describe FoldersController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it 'assigns @folder' do
+      it 'assigns @root_folder' do
         do_render
-        expect(assigns(:folder)).to eq(root)
+        expect(assigns(:root_folder)).to eq(root)
+      end
+
+      it 'assigns @resources' do
+        do_render
+        expect(assigns(:resources)).to eq([folder02, folder01])
       end
 
       it 'renders the :index template' do
@@ -46,10 +54,12 @@ RSpec.describe FoldersController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:folder) { create(:folder, parent_id: root.id) }
+    let(:resource) { create(:folder, parent_id: root.id) }
+    let!(:folder01) { create(:folder, parent_id: resource.id) }
+    let!(:folder02) { create(:folder, parent_id: resource.id) }
 
     def do_render
-      get :show, params: { id: folder.id }
+      get :show, params: { id: resource.id }
     end
 
     context 'サインインしている時' do
@@ -59,9 +69,9 @@ RSpec.describe FoldersController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it 'assigns @folder' do
+      it 'assigns @resources' do
         do_render
-        expect(assigns(:folder)).to eq(folder)
+        expect(assigns(:resources)).to eq([folder02, folder01])
       end
 
       it 'renders the :show template' do

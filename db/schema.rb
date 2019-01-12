@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_01_071341) do
+ActiveRecord::Schema.define(version: 2019_01_12_050856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 2019_01_01_071341) do
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "ancestry"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_rooms_on_ancestry"
+    t.index ["description"], name: "index_rooms_on_description"
+    t.index ["name"], name: "index_rooms_on_name"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -42,4 +55,5 @@ ActiveRecord::Schema.define(version: 2019_01_01_071341) do
   end
 
   add_foreign_key "folders", "users"
+  add_foreign_key "rooms", "users"
 end

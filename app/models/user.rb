@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :admin, inclusion: { in: [true, false] }
 
   has_many :folders, dependent: :destroy
+  has_many :rooms,   dependent: :destroy
 end

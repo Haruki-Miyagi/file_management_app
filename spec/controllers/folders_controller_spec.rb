@@ -1,18 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe FoldersController, type: :controller do
-  let(:user) { create(:user) }
-  let!(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
+  let(:admin_user) { create(:user, :admin) }
+  let!(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
 
   shared_examples 'サインインしていない時' do
     context 'サインインしていない時' do
-      it 'returns http 302' do
+      before do
         do_render
+      end
+
+      it 'returns http 302' do
         expect(response).to have_http_status('302')
       end
 
       it 'ログイン画面へリダイレクトすること' do
-        do_render
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -27,25 +29,24 @@ RSpec.describe FoldersController, type: :controller do
     end
 
     context 'サインインしている時' do
-      before { sign_in(user) }
+      before do
+        sign_in(admin_user)
+        do_render
+      end
 
       it 'returns http success' do
-        do_render
         expect(response).to have_http_status(:success)
       end
 
       it 'assigns @root_folder' do
-        do_render
         expect(assigns(:root_folder)).to eq(root)
       end
 
       it 'assigns @resources' do
-        do_render
         expect(assigns(:resources)).to eq([folder02, folder01])
       end
 
       it 'renders the :index template' do
-        do_render
         expect(response).to render_template :index
       end
     end
@@ -63,19 +64,20 @@ RSpec.describe FoldersController, type: :controller do
     end
 
     context 'サインインしている時' do
-      before { sign_in(user) }
+      before do
+        sign_in(admin_user)
+        do_render
+      end
 
       it 'returns http success' do
         expect(response).to have_http_status(:success)
       end
 
       it 'assigns @resources' do
-        do_render
         expect(assigns(:resources)).to eq([folder02, folder01])
       end
 
       it 'renders the :show template' do
-        do_render
         expect(response).to render_template :show
       end
     end

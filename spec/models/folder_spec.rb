@@ -10,7 +10,12 @@ RSpec.describe Folder, type: :model do
     it { is_expected.to have_db_column(:updated_at) }
   end
 
+  describe 'validation' do
+    it { is_expected.to validate_presence_of(:name) }
+  end
+
   describe 'association' do
     it { is_expected.to belong_to(:user).class_name('User') }
+    it { is_expected.to have_many(:room).class_name('Room') }
   end
 end

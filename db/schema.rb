@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 2019_01_12_050856) do
   create_table "rooms", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.string "ancestry"
+    t.bigint "folder_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ancestry"], name: "index_rooms_on_ancestry"
     t.index ["description"], name: "index_rooms_on_description"
+    t.index ["folder_id"], name: "index_rooms_on_folder_id"
     t.index ["name"], name: "index_rooms_on_name"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
@@ -55,5 +55,6 @@ ActiveRecord::Schema.define(version: 2019_01_12_050856) do
   end
 
   add_foreign_key "folders", "users"
+  add_foreign_key "rooms", "folders"
   add_foreign_key "rooms", "users"
 end

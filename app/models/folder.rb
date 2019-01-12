@@ -7,4 +7,11 @@ class Folder < ApplicationRecord
 
   belongs_to :user
   has_many   :room, dependent: :destroy
+
+  scope :order_by_preference, -> { order(id: :desc) }
+
+  # ルートフォルダを返す
+  def self.summit
+    find_by(name: 'Root', ancestry: nil)
+  end
 end

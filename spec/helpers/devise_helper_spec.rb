@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DeviseHelper, type: :helper do
-  describe '#devise_error_messages?' do
+  describe '#devise_error_messages!' do
     let(:resource) { create(:user) }
 
     context 'エラーメッセージがある時' do

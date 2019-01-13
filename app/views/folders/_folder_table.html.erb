@@ -1,3 +1,5 @@
+<%= render 'add_folder' %>
+
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -12,7 +14,7 @@
         <tr>
           <td>
             <%= link_to folder do %>
-              <i class='glyphicon glyphicon-folder-close glyphicon-icon-color'></i>
+              <i class='glyphicon glyphicon-folder-close'></i>
               <%= folder.name %>
             <% end %>
           </td>

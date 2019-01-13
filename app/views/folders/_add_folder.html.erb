@@ -1,0 +1,24 @@
+<ul class='clearfix table-add-list'>
+  <li style='float: right;'>
+    <a href="<%= new_folder_path(parent_id: @resource.id) %>"
+      data-remote="true" class="btn btn-primary" style='margin: 20px 0;'
+      data-toggle="tooltip" data-placement="top"
+      title="新しくフォルダを作成します">
+      + <i class='glyphicon glyphicon-folder-close'></i>
+    </a>
+  </li>
+</ul>
+<div id="folder-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+<script>
+  $(function () {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('iPhone') > 0  ||
+        ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0 ||
+        (ua.indexOf('iPad') > 0   || ua.indexOf('Android') > 0)) {
+      $('[data-toggle="tooltip"]').tooltip('hide')
+    } else {
+      $('[data-toggle="tooltip"]').tooltip()
+    }
+  })
+</script>

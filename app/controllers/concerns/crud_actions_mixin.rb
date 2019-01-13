@@ -6,10 +6,6 @@ module CrudActionsMixin
     before_action :new_resource, only: %i[new create]
   end
 
-  def index
-    @resources = model_name.order_by_preference
-  end
-
   def show; end
 
   def new

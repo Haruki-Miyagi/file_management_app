@@ -1,6 +1,6 @@
 module ApplicationHelper
   # フォーム画面のエラーメッセージを表示する
-  def resource_error_messages!(resource = nil)
+  def resource_error_messages!(resource)
     return '' if resource.errors.blank?
     html = []
     html << content_tag(:div, class: 'alert alert-danger', role: 'alert') do

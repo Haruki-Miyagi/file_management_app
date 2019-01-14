@@ -102,6 +102,25 @@ RSpec.describe FoldersController, type: :controller do
     include_examples 'サインインしていない時'
   end
 
+  describe 'GET #edit' do
+    let(:resource) { create(:folder, parent_id: root.id) }
+
+    def do_render
+      get :edit, params: { id: resource.to_param }
+    end
+
+    context 'サインインしている時' do
+      before do
+        sign_in(admin_user)
+        do_render
+      end
+
+      pending 'get :edit, params: { id: resource.to_param } => format: :js'
+    end
+
+    include_examples 'サインインしていない時'
+  end
+
   describe 'POST #create' do
     let(:name) { 'name' }
     let(:description) { 'description' }
@@ -144,7 +163,7 @@ RSpec.describe FoldersController, type: :controller do
       end
 
       context 'with invalid params' do
-        let(:name) { {} }
+        let(:name) { '' }
 
         before do
           sign_in(admin_user)
@@ -152,6 +171,70 @@ RSpec.describe FoldersController, type: :controller do
         end
 
         pending 'get :new, params: {}, format: :js'
+      end
+    end
+
+    include_examples 'サインインしていない時'
+  end
+
+  describe 'PATCH #update' do
+    let(:resource) { create(:folder, parent_id: root.id) }
+    let(:name) { 'folder_name' }
+    let(:description) { 'folder_description' }
+    let(:ancestry) { 1 }
+    let(:parent_id) { root.id }
+    let(:user_id) { admin_user }
+    let(:new_attributes) do
+      {
+        name: name,
+        description: description,
+        ancestry: ancestry,
+        parent_id: parent_id,
+        user_id: user_id
+      }
+    end
+
+    def do_render
+      patch :update, params: { id: resource.to_param, folder: new_attributes }
+    end
+
+    context 'サインインしている時' do
+      context 'with valid params' do
+        before { sign_in(admin_user) }
+
+        it 'saves updated folder' do
+          expect do
+            do_render
+          end.to change(Folder, :count).by(1)
+        end
+
+        it 'redirects to the folders#index' do
+          do_render
+          expect(response).to redirect_to(folders_path)
+        end
+
+        it 'updates updated folder' do
+          do_render
+          resource.reload
+          expect(resource.name).to eq(name)
+          expect(resource.description).to eq(description)
+        end
+
+        it 'flash[:notice]にメッセージが含まれること' do
+          do_render
+          expect(flash[:notice]).to eq('正常に更新しました。')
+        end
+      end
+
+      context 'with invalid params' do
+        let(:name) { '' }
+
+        before do
+          sign_in(admin_user)
+          do_render
+        end
+
+        pending 'get :edit, params: { id: resource.to_param } => format: :js'
       end
     end
 

@@ -4,7 +4,8 @@
       <tr>
         <th class='text-center'>ファイル名</th>
         <th class='text-center'>備考</th>
-        <th class='text-center'>編集</th>
+        <th class='text-center' style='width: 60px;'>編集</th>
+        <th class='text-center' style='width: 60px;'>削除</th>
       </tr>
     </thead>
 
@@ -18,7 +19,7 @@
             <% end %>
           </td>
           <td><%= folder.description %></td>
-          <td class='text-center' style='width: 60px;'>
+          <td class='text-center'>
             <% if edit_permission_exist?(folder) %>
               <a href="<%= edit_folder_path(folder) %>"
                 data-remote='true'
@@ -27,6 +28,11 @@
                 <i style='font-size: 18px;' class='glyphicon glyphicon-edit'></i>
               </a>
               <div id='folder-modal' class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'></div>
+            <% end %>
+          </td>
+          <td class='text-center'>
+            <%= link_to folder, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i style='font-size: 18px; color: #EC5800;' class='glyphicon glyphicon-trash'></i>
             <% end %>
           </td>
         </tr>

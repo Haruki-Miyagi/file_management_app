@@ -4,7 +4,7 @@ module CrudActionsMixin
   included do
     before_action :set_resource, only: %i[show edit update destroy]
     before_action :new_resource, only: %i[new create]
-    before_action :redirect_path_for_create_update, only: %i[create update destroy]
+    before_action :redirect_path_for_crud, only: %i[create update destroy]
   end
 
   def show; end
@@ -66,8 +66,8 @@ module CrudActionsMixin
   end
 
   # レコードを保存できたときのリダイレクトパスを指定する
-  # create、updateで保存が行われるため
-  def redirect_path_for_create_update
+  # create、update、deleteで保存が行われるため@redirect_pathとして使用する
+  def redirect_path_for_crud
     @redirect_path = request.referer.presence || { action: :index }
   end
 end

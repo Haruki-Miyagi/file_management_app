@@ -31,8 +31,10 @@
             <% end %>
           </td>
           <td class='text-center'>
-            <%= link_to folder, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <i style='font-size: 18px; color: #EC5800;' class='glyphicon glyphicon-trash'></i>
+            <% if edit_permission_exist?(folder) %>
+              <%= link_to folder, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i style='font-size: 18px; color: #EC5800;' class='glyphicon glyphicon-trash'></i>
+              <% end %>
             <% end %>
           </td>
         </tr>

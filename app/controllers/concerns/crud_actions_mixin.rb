@@ -66,7 +66,6 @@ module CrudActionsMixin
   end
 
   # レコードを保存できたときのリダイレクトパスを指定する
-  # create、update、deleteで保存が行われるため@redirect_pathとして使用する
   def redirect_path_for_crud
     @redirect_path = request.referer.presence || { action: :index }
   end

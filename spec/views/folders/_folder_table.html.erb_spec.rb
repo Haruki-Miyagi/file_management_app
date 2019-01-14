@@ -73,8 +73,12 @@ RSpec.describe 'folders/_folder_table.html.erb', type: :view do
     end
 
     it 'リンク付きの削除アイコンがあること' do
-      assert_select 'table.table' do
-        assert_select 'i[class=?]', 'glyphicon glyphicon-trash'
+      resources.each do |resource|
+        assert_select 'table.table' do
+          assert_select 'tbody td a[href=?][data-method="delete"]', "/folders/#{resource.id}" do
+            assert_select 'i[class=?]', 'glyphicon glyphicon-trash'
+          end
+        end
       end
     end
   end

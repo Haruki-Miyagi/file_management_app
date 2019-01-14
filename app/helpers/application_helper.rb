@@ -12,4 +12,9 @@ module ApplicationHelper
     end
     safe_join html
   end
+
+  # 編集権限が削除権限があるか返す
+  def edit_permission_exist?(resource)
+    (current_user.id == resource.user_id) || current_user.admin?
+  end
 end

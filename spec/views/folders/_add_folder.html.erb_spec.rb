@@ -1,13 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'folders/index.html.erb', type: :view do
+RSpec.describe 'folders/_add_folder.html.erb', type: :view do
   let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
   let!(:resources) { create_list(:folder, 2, parent_id: root.id) }
 
   before do
-    assign(:resource, root)
-    assign(:resources, resources)
-    render
+    render partial: 'folders/add_folder', locals: { resource: root }
   end
 
   context '追加ボタン' do

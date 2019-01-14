@@ -56,4 +56,36 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe 'edit_permission_exist?' do
+    let(:others_user) { create(:user) }
+    let(:admin_user) { create(:user, :admin) }
+    let(:others_folder) { create(:folder, user_id: others_user.id) }
+    let(:admin_folder) { create(:folder, user_id: admin_user.id) }
+
+    context 'ユーザーがadmin_userの場合' do
+      before { allow(helper).to receive(:current_user).and_return(admin_user) }
+
+      it 'trueを返すこと' do
+        expect(helper.edit_permission_exist?(others_folder)).to eq(true)
+        expect(helper.edit_permission_exist?(admin_folder)).to eq(true)
+      end
+    end
+
+    context 'ユーザーがothers_userの場合' do
+      before { allow(helper).to receive(:current_user).and_return(others_user) }
+
+      context '権限がある時' do
+        it 'trueを返すこと' do
+          expect(helper.edit_permission_exist?(others_folder)).to eq(true)
+        end
+      end
+
+      context '権限がないとき' do
+        it 'falseを返すこと' do
+          expect(helper.edit_permission_exist?(admin_folder)).to eq(false)
+        end
+      end
+    end
+  end
 end

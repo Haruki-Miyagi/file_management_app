@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'shared/_left_side_nav', type: :view do
+RSpec.describe 'shared/_left_side_nav.html.erb', type: :view do
   before do
     render partial: 'shared/left_side_nav'
   end

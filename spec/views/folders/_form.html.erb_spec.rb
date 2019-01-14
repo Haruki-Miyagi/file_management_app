@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'folders/_form', type: :view do
+RSpec.describe 'folders/_form.html.erb', type: :view do
   let(:user) { create(:user, :admin) }
   let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
   let(:folder) { create(:folder, parent_id: root.id) }

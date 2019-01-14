@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'folders/index.html.erb', type: :view do
-  let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
+  let(:admin_user) { create(:user, :admin) }
+  let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
   let!(:resources) { create_list(:folder, 2, parent_id: root.id) }
 
   before do
+    allow(view).to receive(:current_user).and_return(admin_user)
     assign(:resource, root)
     assign(:resources, resources)
     render

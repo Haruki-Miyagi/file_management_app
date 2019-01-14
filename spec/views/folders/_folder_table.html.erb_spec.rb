@@ -22,6 +22,12 @@ RSpec.describe 'folders/index.html.erb', type: :view do
         assert_select 'thead th', text: '備考', count: 1
       end
     end
+
+    it '備考があること' do
+      assert_select 'table.table' do
+        assert_select 'thead th', text: '編集', count: 1
+      end
+    end
   end
 
   context 'テーブル本体' do
@@ -37,6 +43,25 @@ RSpec.describe 'folders/index.html.erb', type: :view do
       resources.each do |resource|
         assert_select 'table.table' do
           assert_select 'tbody td', text: resource.description
+        end
+      end
+    end
+
+    context '編集' do
+      it 'リンク付きの編集アイコンがあること' do
+        resources.each do |resource|
+          assert_select 'table.table' do
+            assert_select 'tbody td a[href=?]', edit_folder_path(resource) do
+              assert_select 'i[class=?]', 'glyphicon glyphicon-edit'
+            end
+          end
+        end
+      end
+
+      it 'ポップアップメッセージがあること' do
+        assert_select 'table.table td' do
+          assert_select 'a[title=?]', '編集するにはクリックしてください'
+          assert_select 'a[data-toggle=?]', 'tooltip'
         end
       end
     end

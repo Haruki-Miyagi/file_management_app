@@ -23,20 +23,11 @@ RSpec.describe 'folders/index.html.erb', type: :view do
       end
 
       context 'ポップアップメッセージ' do
-        it '新しくフォルダを作成しますのテキストがあること' do
+        it '新しくフォルダを作成しますのポップアップメッセージのテキストがあること' do
           assert_select 'ul.table-add-list li' do
             assert_select 'a[title=?]', '新しくフォルダを作成します'
             assert_select 'a[data-toggle=?]', 'tooltip'
           end
-        end
-
-        it 'スクリプトがあること' do
-          assert_select 'script', /data-toggle/
-          assert_select 'script', /tooltip/
-        end
-
-        it 'pcとモバイルで表示法をわけてあること' do
-          assert_select 'script', /navigator.userAgent/
         end
       end
     end
@@ -71,6 +62,17 @@ RSpec.describe 'folders/index.html.erb', type: :view do
           assert_select 'tbody td', text: resource.description
         end
       end
+    end
+  end
+
+  context 'ポップアップメッセージ' do
+    it 'スクリプトがあること' do
+      assert_select 'script', /data-toggle/
+      assert_select 'script', /tooltip/
+    end
+
+    it 'pcとモバイルで表示法をわけてあること' do
+      assert_select 'script', /navigator.userAgent/
     end
   end
 end

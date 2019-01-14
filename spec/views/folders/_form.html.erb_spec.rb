@@ -17,8 +17,8 @@ RSpec.describe 'folders/_form', type: :view do
     end
   end
 
-  it 'Root内の新規フォルダ作成のヘッダーがあること' do
-    assert_select 'h4.modal-title', text: 'Root内の新規フォルダ作成'
+  it 'Root内フォルダのヘッダーがあること' do
+    assert_select 'h4.modal-title', text: 'Root内フォルダ'
   end
 
   it 'フォームを表示すること' do

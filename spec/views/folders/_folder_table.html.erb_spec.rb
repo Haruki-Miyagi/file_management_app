@@ -25,7 +25,7 @@ RSpec.describe 'folders/index.html.erb', type: :view do
   end
 
   context 'テーブル本体' do
-    it 'リンク付きのファイルのテキストがある表示してあること' do
+    it 'リンク付きのファイルのテキストがあること' do
       resources.each do |resource|
         assert_select 'table.table' do
           assert_select 'tbody td a[href=?]', folder_path(resource), text: resource.name
@@ -33,7 +33,7 @@ RSpec.describe 'folders/index.html.erb', type: :view do
       end
     end
 
-    it '備考のテキストがある表示してあること' do
+    it '備考のテキストがあること' do
       resources.each do |resource|
         assert_select 'table.table' do
           assert_select 'tbody td', text: resource.description

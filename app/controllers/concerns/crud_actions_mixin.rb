@@ -2,7 +2,7 @@ module CrudActionsMixin
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_resources, only: %i[show]
+    before_action :set_resource, only: %i[show]
     before_action :new_resource, only: %i[new create]
   end
 
@@ -33,7 +33,7 @@ module CrudActionsMixin
     self.class.to_s.gsub!('sController', '').constantize
   end
 
-  def set_resources
+  def set_resource
     @resource = model_name.find(params[:id])
   end
 

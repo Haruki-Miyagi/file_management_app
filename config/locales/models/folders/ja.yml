@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      folder: フォルダ
+    attributes:
+      folder:
+        name: フォルダ名
+        description: 備考
+  errors:
+    messages:
+      blank: "が記入されていません。"

@@ -240,4 +240,31 @@ RSpec.describe FoldersController, type: :controller do
 
     include_examples 'サインインしていない時'
   end
+
+  describe 'DELETE #destroy' do
+    let!(:resource) { create(:folder, parent_id: root.id) }
+
+    def do_render
+      delete :destroy, params: { id: resource.id }
+    end
+
+    context 'サインインしている時' do
+      before do
+        sign_in(admin_user)
+      end
+
+      it 'deletes the folders' do
+        expect do
+          do_render
+        end.to change(Folder, :count).by(-1)
+      end
+
+      it 'redirects the :create template' do
+        do_render
+        expect(response).to redirect_to(folders_path)
+      end
+    end
+
+    include_examples 'サインインしていない時'
+  end
 end

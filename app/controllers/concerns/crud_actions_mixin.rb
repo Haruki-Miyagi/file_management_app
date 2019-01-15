@@ -2,9 +2,9 @@ module CrudActionsMixin
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_resource, only: %i[show edit update]
+    before_action :set_resource, only: %i[show edit update destroy]
     before_action :new_resource, only: %i[new create]
-    before_action :redirect_path_for_create_update, only: %i[create update]
+    before_action :redirect_path_for_crud, only: %i[create update destroy]
   end
 
   def show; end
@@ -43,6 +43,14 @@ module CrudActionsMixin
     end
   end
 
+  def destroy
+    @resource.destroy
+
+    respond_to do |format|
+      format.html { redirect_to @redirect_path, notice: '削除しました。' }
+    end
+  end
+
   private
 
   def model_name
@@ -58,8 +66,7 @@ module CrudActionsMixin
   end
 
   # レコードを保存できたときのリダイレクトパスを指定する
-  # create、updateで保存が行われるため
-  def redirect_path_for_create_update
+  def redirect_path_for_crud
     @redirect_path = request.referer.presence || { action: :index }
   end
 end

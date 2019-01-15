@@ -28,6 +28,12 @@ RSpec.describe 'folders/_folder_table.html.erb', type: :view do
         assert_select 'thead th', text: '編集', count: 1
       end
     end
+
+    it '削除があること' do
+      assert_select 'table.table' do
+        assert_select 'thead th', text: '削除', count: 1
+      end
+    end
   end
 
   context 'テーブル本体' do
@@ -62,6 +68,16 @@ RSpec.describe 'folders/_folder_table.html.erb', type: :view do
         assert_select 'table.table td' do
           assert_select 'a[title=?]', '編集するにはクリックしてください'
           assert_select 'a[data-toggle=?]', 'tooltip'
+        end
+      end
+    end
+
+    it 'リンク付きの削除アイコンがあること' do
+      resources.each do |resource|
+        assert_select 'table.table' do
+          assert_select 'tbody td a[href=?][data-method="delete"]', "/folders/#{resource.id}" do
+            assert_select 'i[class=?]', 'glyphicon glyphicon-trash'
+          end
         end
       end
     end

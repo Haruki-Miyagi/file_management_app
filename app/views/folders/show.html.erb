@@ -1,4 +1,4 @@
-<h1 style='margin: 20px 20px 20px 100px;'>パンくず追加用</h1>
+<% breadcrumb :folder, @root_below_folder %>
 
 <%= render partial: 'add_folder', locals: { resource: @resource } %>
 <%= render partial: 'folder_table', locals: { resources: @resources } %>

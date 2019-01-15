@@ -36,6 +36,9 @@ gem 'toastr-rails'
 # folder階層化gem[https://github.com/stefankroes/ancestry]
 gem 'ancestry'
 
+# パンくずリスト[https://github.com/lassebunk/gretel]
+gem 'gretel'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

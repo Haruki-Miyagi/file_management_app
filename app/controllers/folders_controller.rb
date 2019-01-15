@@ -8,6 +8,7 @@ class FoldersController < ApplicationController
 
   def show
     @resources = @resource.children.order_by_preference
+    @root_below_folder = @resource.path.unset_root
   end
 
   private

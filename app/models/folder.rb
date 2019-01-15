@@ -9,6 +9,7 @@ class Folder < ApplicationRecord
   has_many   :room, dependent: :destroy
 
   scope :order_by_preference, -> { order(id: :desc) }
+  scope :unset_root, -> { where.not(name: 'Root', ancestry: nil) }
 
   # ルートフォルダを返す
   def self.summit

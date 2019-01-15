@@ -77,6 +77,10 @@ RSpec.describe FoldersController, type: :controller do
         expect(assigns(:resources)).to eq([folder02, folder01])
       end
 
+      it 'assigns @root_below_folder' do
+        expect(assigns(:root_below_folder)).to eq([resource])
+      end
+
       it 'renders the :show template' do
         expect(response).to render_template :show
       end

@@ -30,6 +30,14 @@ RSpec.describe Folder, type: :model do
     end
   end
 
+  describe 'scope :unset_root' do
+    let!(:folders) { create_list(:folder, 5, parent_id: root.id) }
+
+    it 'rootレコードが含まないこと' do
+      expect(Folder.unset_root).to_not include(root)
+    end
+  end
+
   describe 'summit' do
     context 'Rootフォルダが作成済みである場合' do
       it 'Rootフォルダのインスタンスが返されること' do

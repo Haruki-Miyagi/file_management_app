@@ -18,7 +18,7 @@ RSpec.describe Folder, type: :model do
 
   describe 'association' do
     it { is_expected.to belong_to(:user).class_name('User') }
-    it { is_expected.to have_many(:room).class_name('Room') }
+    it { is_expected.to have_many(:rooms).class_name('Room') }
   end
 
   describe 'scope :order_by_preference' do

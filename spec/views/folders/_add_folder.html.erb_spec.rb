@@ -9,6 +9,25 @@ RSpec.describe 'folders/_add_folder.html.erb', type: :view do
   end
 
   context '追加ボタン' do
+    context 'ファイル管理' do
+      context 'フォルダ追加ボタン' do
+        it 'リンク付きであること' do
+          assert_select 'ul.table-add-list li' do
+            assert_select 'a[href=?]', "/rooms/new?folder_id=#{root.id}"
+            assert_select 'a', text: '+'
+            assert_select 'i[class=?]', 'glyphicon glyphicon-list-alt'
+          end
+        end
+      end
+
+      it '新しくファイル管理フォルダを作成しますのポップアップメッセージがあること' do
+        assert_select 'ul.table-add-list li' do
+          assert_select 'a[title=?]', '新しくファイル管理フォルダを作成します'
+          assert_select 'a[data-toggle=?]', 'tooltip'
+        end
+      end
+    end
+
     context 'フォルダ' do
       context 'フォルダ追加ボタン' do
         it 'リンク付きであること' do

@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Folder, type: :model do
-  let!(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
+  let(:admin_user) { create(:user, :admin) }
+  let!(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
 
   describe 'column' do
     it { is_expected.to have_db_column(:name) }
@@ -43,6 +44,25 @@ RSpec.describe Folder, type: :model do
       it 'Rootフォルダのインスタンスが返されること' do
         expect(subject.class.summit).to eq(root)
       end
+    end
+  end
+
+  describe 'all_childrens' do
+    let!(:folders) { create_list(:folder, 5, parent_id: root.id) }
+    let(:rooms) { create_list(:room, 3, user_id: admin_user.id, folder_id: root.id) }
+
+    it 'rootフォルダ直下のフォルダ(rootフォルダも含む)があること' do
+      expected_value = folders + rooms
+      expect(root.all_childrens).to eq(expected_value)
+    end
+  end
+
+  describe 'root_below_folder' do
+    let(:folders) { create_list(:folder, 5, parent_id: root.id) }
+    let(:resource) { create(:folder, parent_id: folders.first.id) }
+
+    it 'rootレコードが以外の子フォルダが取得できること' do
+      expect(resource.root_below_folder).to_not include(root)
     end
   end
 end

@@ -18,7 +18,7 @@ RSpec.describe 'folders/_form.html.erb', type: :view do
   end
 
   it 'Root内フォルダのヘッダーがあること' do
-    assert_select 'h4.modal-title', text: 'Root内フォルダ'
+    assert_select 'h4.modal-title', text: "#{folder.name}フォルダ"
   end
 
   it 'フォームを表示すること' do

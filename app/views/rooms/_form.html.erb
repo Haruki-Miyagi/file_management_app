@@ -4,7 +4,7 @@
       <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
         <span aria-hidden='true'>&times;</span>
       </button>
-      <h4 class='modal-title' id='exampleModalLabel'><%= resource.name %>フォルダ</h4>
+      <h4 class='modal-title' id='exampleModalLabel'><%= resource.name %>ファイル管理</h4>
     </div>
     
     <div class='modal-body' style='padding-bottom: 0;'>
@@ -21,8 +21,8 @@
           <%= form.text_area :description, class:'form-control' %>
         </div>
 
-        <%= form.hidden_field :parent_id %>
-        <%= form.hidden_field :user_id,  value: current_user.id %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :folder_id, value: resource.folder.id %>
         <hr/>
 
         <div class='form-group'>

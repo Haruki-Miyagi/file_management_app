@@ -17,5 +17,6 @@ RSpec.describe Room, type: :model do
   describe 'association' do
     it { is_expected.to belong_to(:user).class_name('User') }
     it { is_expected.to belong_to(:folder).class_name('Folder') }
+    it { is_expected.to have_many(:documents).class_name('Document') }
   end
 end

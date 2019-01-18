@@ -3,7 +3,10 @@
     <div class="col-sm-2">
       <%= render 'shared/left_side_nav' %>
     </div>
-    <div class="col-sm-10"><%= yield %></div>        
+    <div class="col-sm-10">
+      <%= breadcrumbs separator: " &rsaquo; " %>
+      <%= yield %>
+    </div>        
   <% else %>
     <%= yield %>
   <% end %>

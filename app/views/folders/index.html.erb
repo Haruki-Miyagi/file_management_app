@@ -1,3 +1,19 @@
-<h1 style='margin: 20px 20px 20px 100px;'>パンくず追加用</h1>
+<div class='breadcrumbs'>
+  <%= link_to 'Home', folders_path %> &rsaquo;
+</div>
 
+<%= render partial: 'add_folder', locals: { resource: @resource } %>
 <%= render partial: 'folder_table', locals: { resources: @resources } %>
+
+<script>
+  $(function () {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('iPhone') > 0  ||
+        ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0 ||
+        (ua.indexOf('iPad') > 0   || ua.indexOf('Android') > 0)) {
+      $('[data-toggle="tooltip"]').tooltip('hide')
+    } else {
+      $('[data-toggle="tooltip"]').tooltip()
+    }
+  })
+</script>

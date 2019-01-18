@@ -9,10 +9,34 @@ body {
   background: whitesmoke;
 }
 
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.breadcrumbs {
+  margin: 20px 38px 5px;
+}
+
+// -----------------------------------
+// テーブルのスタイリング
+// -----------------------------------
+tr td {
+  line-height: 1.5;
+}
+
+ul.table-add-list { list-style: none; }
+
 // -----------------------------------
 // toastrのスタイリング
 // https://github.com/tylergannon/toastr-rails
 // -----------------------------------
+.toast-message {
+  display: false;
+}
 
 .toast-error {
   background-color: #333333 !important;

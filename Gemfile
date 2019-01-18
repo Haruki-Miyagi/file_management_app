@@ -36,6 +36,9 @@ gem 'toastr-rails'
 # folder階層化gem[https://github.com/stefankroes/ancestry]
 gem 'ancestry'
 
+# ファイルを保存するために追加[https://github.com/carrierwaveuploader/carrierwave]
+gem 'carrierwave'
+
 # パンくずリスト[https://github.com/lassebunk/gretel]
 gem 'gretel'
 

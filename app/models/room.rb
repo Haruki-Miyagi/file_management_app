@@ -3,4 +3,5 @@ class Room < ApplicationRecord
 
   belongs_to :user
   belongs_to :folder
+  has_many   :documents, dependent: :destroy
 end

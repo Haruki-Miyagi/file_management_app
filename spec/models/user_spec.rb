@@ -19,5 +19,6 @@ RSpec.describe User, type: :model do
   describe 'association' do
     it { is_expected.to have_many(:folders).class_name('Folder') }
     it { is_expected.to have_many(:rooms).class_name('Room') }
+    it { is_expected.to have_many(:documents).class_name('Document') }
   end
 end

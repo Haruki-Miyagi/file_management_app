@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      document: ファイル
+    attributes:
+      document:
+        file_name: ファイル名
+        description: 備考
+  errors:
+    messages:
+      blank: "が記入されていません。"

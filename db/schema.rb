@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_12_050856) do
+ActiveRecord::Schema.define(version: 2019_01_17_135214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "documents", force: :cascade do |t|
+    t.string "file_name", null: false
+    t.string "uploaded_file", null: false
+    t.text "description"
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["description"], name: "index_documents_on_description"
+    t.index ["file_name"], name: "index_documents_on_file_name"
+    t.index ["room_id"], name: "index_documents_on_room_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
 
   create_table "folders", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +68,8 @@ ActiveRecord::Schema.define(version: 2019_01_12_050856) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "documents", "rooms"
+  add_foreign_key "documents", "users"
   add_foreign_key "folders", "users"
   add_foreign_key "rooms", "folders"
   add_foreign_key "rooms", "users"

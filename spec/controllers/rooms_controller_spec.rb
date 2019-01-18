@@ -116,9 +116,9 @@ RSpec.describe RoomsController, type: :controller do
           end.to change(Room, :count).by(1)
         end
 
-        it 'redirects to the created rooms#index' do
+        it 'redirects to the created folders#index' do
           do_render
-          expect(response).to redirect_to(rooms_path)
+          expect(response).to redirect_to(folders_path)
         end
 
         it 'flash[:notice]にメッセージが含まれること' do
@@ -172,9 +172,9 @@ RSpec.describe RoomsController, type: :controller do
           end.to change(Room, :count).by(1)
         end
 
-        it 'redirects to the rooms#index' do
+        it 'redirects to the folders#index' do
           do_render
-          expect(response).to redirect_to(rooms_path)
+          expect(response).to redirect_to(folders_path)
         end
 
         it 'updates updated room' do
@@ -223,9 +223,9 @@ RSpec.describe RoomsController, type: :controller do
         end.to change(Room, :count).by(-1)
       end
 
-      it 'redirects the :create template' do
+      it 'redirects to folders#index' do
         do_render
-        expect(response).to redirect_to(rooms_path)
+        expect(response).to redirect_to(folders_path)
       end
     end
 

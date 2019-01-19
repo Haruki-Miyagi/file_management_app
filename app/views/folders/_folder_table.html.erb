@@ -9,30 +9,32 @@
       </tr>
     </thead>
 
-    <% resources.each do |folder| %>
+    <% resources.each do |resource| %>
       <tbody>
         <tr>
           <td>
-            <%= link_to folder do %>
-              <i class='glyphicon glyphicon-folder-close'></i>
-              <%= folder.name %>
+            <%= link_to resource do %>
+              <i class="glyphicon <%= display_icon_status(resource) %>"></i>
+              <%= resource.name %>
             <% end %>
           </td>
-          <td><%= folder.description %></td>
+
+          <td><%= resource.description %></td>
+
           <td class='text-center'>
-            <% if edit_permission_exist?(folder) %>
-              <a href="<%= edit_folder_path(folder) %>"
+            <% if edit_permission_exist?(resource) %>
+              <a href="<%= change_instance_redirect(resource) %>"
                 data-remote='true'
                 data-toggle="tooltip" data-placement="top"
                 title='編集するにはクリックしてください'>
                 <i style='font-size: 18px;' class='glyphicon glyphicon-edit'></i>
               </a>
-              <div id='folder-modal' class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'></div>
             <% end %>
           </td>
+
           <td class='text-center'>
-            <% if edit_permission_exist?(folder) %>
-              <%= link_to folder, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <% if edit_permission_exist?(resource) %>
+              <%= link_to resource, method: :delete, data: { confirm: 'Are you sure?' } do %>
                 <i style='font-size: 18px; color: #EC5800;' class='glyphicon glyphicon-trash'></i>
               <% end %>
             <% end %>

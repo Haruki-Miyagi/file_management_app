@@ -3,12 +3,12 @@ class FoldersController < ApplicationController
 
   def index
     @resource = Folder.summit
-    @resources = @resource.children.order_by_preference
+    @resources = @resource.all_childrens.sort_by { |r, _| r.created_at }.reverse
   end
 
   def show
-    @resources = @resource.children.order_by_preference
-    @root_below_folder = @resource.path.unset_root
+    @resources = @resource.all_childrens.sort_by { |r, _| r.created_at }.reverse
+    @root_below_folder = @resource.root_below_folder
   end
 
   private

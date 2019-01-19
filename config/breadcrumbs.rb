@@ -13,3 +13,14 @@ crumb :folder do |resources|
     parent :root
   end
 end
+
+# フォルダ詳細のパンくず
+crumb :room do |resource|
+  resource.folder.root_below_folder.each do |folder|
+    link folder.name, "/folders/#{folder.id}"
+    parent :root
+  end
+
+  link resource.name, "/rooms/#{resource.id}"
+  parent :root
+end

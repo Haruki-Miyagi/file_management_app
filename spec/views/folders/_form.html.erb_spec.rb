@@ -4,11 +4,10 @@ RSpec.describe 'folders/_form.html.erb', type: :view do
   let(:user) { create(:user, :admin) }
   let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
   let(:folder) { create(:folder, parent_id: root.id) }
-  let!(:resources) { create_list(:folder, 2, parent_id: folder.id) }
 
   before do
     allow(view).to receive(:current_user).and_return(user)
-    render partial: 'folders/form', locals: { resources: resources, resource: folder }
+    render partial: 'folders/form', locals: { resource: folder }
   end
 
   it '閉じるボタンがあること' do
@@ -18,7 +17,7 @@ RSpec.describe 'folders/_form.html.erb', type: :view do
   end
 
   it 'Root内フォルダのヘッダーがあること' do
-    assert_select 'h4.modal-title', text: 'Root内フォルダ'
+    assert_select 'h4.modal-title', text: "#{folder.name}フォルダ"
   end
 
   it 'フォームを表示すること' do

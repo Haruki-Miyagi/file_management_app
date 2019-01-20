@@ -1,6 +1,10 @@
 class RoomsController < ApplicationController
   include CrudActionsMixin
 
+  def show
+    @messages = @resource.messages
+  end
+
   private
 
   def resource_params

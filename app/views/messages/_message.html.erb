@@ -1,0 +1,14 @@
+<div class="col-md-4">
+  <%= "#{message.user.email}" %>
+  <br/>
+</div>
+
+<div class="col-md-8">
+  <div class="bms_message bms_left bms_message_box">
+    <div class="bms_message_box">
+      <div class="bms_message_content">
+        <%= simple_format(message.content) %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,26 +1,28 @@
 <% breadcrumb :room, @resource %>
 
 <div class='chat_form'>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">ファイル管理名 : <%= @resource.name %></h3>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <h3 class='panel-title'>ファイル管理名 : <%= @resource.name %></h3>
     </div>
 
-    <div class="panel-body pre-scrollable scroll-bar", id="messages", data-room_id="<%= @resource.id %>">
-      <div class="message">
+    <div class='panel-body pre-scrollable scroll-bar', id='messages', data-room_id="<%= @resource.id %>">
+      <div class='message'>
         <%= render @messages %>
       </div>
     </div>
 
-    <div class="panel-body">
-      <form class="form-group">
-        <div class="col-sm-11">
-          <textarea type="text" id='message-box' data-behavior="room_speaker" class="form-control" placeholder='Text input' style='max-height: 100px;'></textarea>
+    <div class='panel-body'>
+      <form class='form-group'>
+        <div class='col-sm-11'>
+          <textarea type='text' id='message-box' data-behavior='room_speaker' class='form-control' placeholder='Text input' style='max-height: 100px;'></textarea>
         </div>
-        <div class="col-sm-1">
+        
+        <div class='col-sm-1'>
           <button type='button' id='send-btn' style='line-height: 40px; border-radius: 5px;'>送信</button>
         </div>
-        <div class="col-sm-12">
+
+        <div class='col-sm-12'>
           <p>PCの場合は入力後Control + enter キーでも送信できます。</p>
         </div>
       </form>

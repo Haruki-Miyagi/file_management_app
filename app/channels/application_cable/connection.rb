@@ -3,7 +3,6 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     # コネクションを識別するキー
-    # つまりログイン時に設定したCookieを取り出す
     identified_by :current_user
 
     def connect
@@ -13,6 +12,7 @@ module ApplicationCable
     protected
 
     def find_verified_user
+      # 現在ログインしているユーザーをcurrent_userに設定
       if (current_user = env['warden'].user)
         current_user
       else

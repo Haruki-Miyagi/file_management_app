@@ -23,6 +23,7 @@ RSpec.describe RoomsController, type: :controller do
 
   describe 'GET #show' do
     let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
+    let(:messages) { create_list(:message, 3, room_id: resource.id) }
 
     def do_render
       get :show, params: { id: resource.id }
@@ -40,6 +41,10 @@ RSpec.describe RoomsController, type: :controller do
 
       it 'assigns @resource' do
         expect(assigns(:resource)).to eq(resource)
+      end
+
+      it 'assigns @messages' do
+        expect(assigns(:messages)).to eq(messages)
       end
 
       it 'renders the :show template' do

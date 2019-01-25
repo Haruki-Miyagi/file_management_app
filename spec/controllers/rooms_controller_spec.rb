@@ -24,7 +24,7 @@ RSpec.describe RoomsController, type: :controller do
   describe 'GET #show' do
     let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
     let(:messages) { create_list(:message, 3, room_id: resource.id) }
-    let(:documents) { create_list(:document, 3,user_id: admin_user.id, room_id: resource.id) }
+    let(:documents) { create_list(:document, 3, user_id: admin_user.id, room_id: resource.id) }
 
     def do_render
       get :show, params: { id: resource.id }

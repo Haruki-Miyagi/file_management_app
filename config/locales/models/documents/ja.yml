@@ -6,7 +6,7 @@ ja:
       document:
         file_name: ファイル名(保存用のファイル名)
         description: 備考
-        uploaded_file: ファイル
+        file_date: ファイル
   errors:
     messages:
       blank: "が記入されていません。"

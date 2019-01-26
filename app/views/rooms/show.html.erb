@@ -1,6 +1,6 @@
 <% breadcrumb :room, @resource %>
 
-<%= render partial: 'chat_room', locals: { resource: @resource } %>
+<%= render partial: 'chat_room', locals: { resource: @resource, messages: @messages } %>
 <%= render partial: 'documents/documents_table', locals: { resource: @resource, documents: @documents } %>
 
 <script>

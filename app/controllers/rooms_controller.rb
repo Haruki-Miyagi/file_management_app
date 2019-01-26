@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
 
   def show
     @messages = @resource.messages
-    @documents = @resource.documents
+    @documents = @resource.documents.order_by_preference
   end
 
   private

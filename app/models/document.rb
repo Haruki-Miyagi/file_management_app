@@ -4,4 +4,6 @@ class Document < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
+
+  scope :order_by_preference, -> { order(id: :desc) }
 end

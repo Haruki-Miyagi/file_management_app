@@ -4,9 +4,10 @@ ja:
       document: ファイル
     attributes:
       document:
-        file_name: ファイル名(保存用のファイル名前)
+        file_name: ファイル名(保存用のファイル名)
         description: 備考
         uploaded_file: ファイル
   errors:
     messages:
       blank: "が記入されていません。"
+      max_size_error: "ファイルファイルサイズが5MBサイズ以下にしてください。"

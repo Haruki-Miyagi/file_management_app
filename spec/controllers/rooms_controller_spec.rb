@@ -49,7 +49,8 @@ RSpec.describe RoomsController, type: :controller do
       end
 
       it 'assigns @messages' do
-        expect(assigns(:documents)).to eq(documents)
+        expected_value = documents.reverse
+        expect(assigns(:documents)).to eq(expected_value)
       end
 
       it 'renders the :show template' do

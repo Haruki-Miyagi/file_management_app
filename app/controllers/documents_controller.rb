@@ -4,7 +4,7 @@ class DocumentsController < ApplicationController
   private
 
   def resource_params
-    params.require(:document).permit(:file_name, :uploaded_file, :description, :user_id, :room_id)
+    UploadFileService.new(params[:document]).define_params
   end
 
   def new_resource

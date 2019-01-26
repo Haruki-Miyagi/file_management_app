@@ -40,7 +40,7 @@ RSpec.describe DocumentsController, type: :controller do
 
   describe 'POST #create' do
     let(:file_name) { 'Document-Name' }
-    let(:uploaded_file) do
+    let(:file_date) do
       Rack::Test::UploadedFile.new(
         Rails.root.join('spec', 'up_folder', 'file01.xlsx'), 'application/vnd.ms-excel'
       )
@@ -51,7 +51,7 @@ RSpec.describe DocumentsController, type: :controller do
     let(:valid_attributes) do
       {
         file_name: file_name,
-        uploaded_file: uploaded_file,
+        file_date: file_date,
         description: description,
         user_id: user_id,
         room_id: room_id

@@ -23,7 +23,7 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
       it 'メールアドレスがあること' do
         assert_select 'div.chat_form' do
           assert_select 'div.panel-body[data-room_id=?]', resource.id.to_s do
-            assert_select 'div.col-md-4:nth-child(1)', user.email.to_s
+            assert_select 'div.message div.col-md-4:nth-child(1)', user.email.to_s
           end
         end
       end
@@ -31,7 +31,7 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
       it 'メッセージがあること' do
         assert_select 'div.chat_form' do
           assert_select 'div.panel-body[data-room_id=?]', resource.id.to_s do
-            assert_select 'div.bms_message_content:nth-child(1)', messages.first.content.to_s
+            assert_select 'div.message div.bms_message_content:nth-child(1)', messages.first.content.to_s
           end
         end
       end
@@ -51,12 +51,6 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
           assert_select 'div.col-sm-1' do
             assert_select 'button[type="button"]', text: '送信'
           end
-        end
-      end
-
-      it 'pc用のコメントメッセージがあること' do
-        assert_select 'form.form-group' do
-          assert_select 'div.col-sm-12 p', text: 'PCの場合は入力後Control + enter キーでも送信できます。'
         end
       end
 

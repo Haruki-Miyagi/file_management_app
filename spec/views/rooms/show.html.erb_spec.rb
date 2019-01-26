@@ -63,12 +63,6 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
           assert_select 'div.col-sm-12 p', text: 'PCの場合は入力後Control + enter キーでも送信できます。'
         end
       end
-
-      it 'pc用のコメントメッセージがあること' do
-        assert_select 'form.form-group' do
-          assert_select 'div.col-sm-12 p', text: 'PCの場合は入力後Control + enter キーでも送信できます。'
-        end
-      end
     end
   end
 

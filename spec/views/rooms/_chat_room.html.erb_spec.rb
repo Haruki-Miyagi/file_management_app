@@ -22,7 +22,7 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
     context 'チャットボディ' do
       it 'メールアドレスがあること' do
         assert_select 'div.chat_form' do
-          assert_select 'div.panel-body[data-room_id=?]', resource.id.to_s do
+          assert_select 'div.panel-body[data-room_id=?]#messages', resource.id.to_s do
             assert_select 'div.message div.col-md-4:nth-child(1)', user.email.to_s
           end
         end
@@ -30,7 +30,7 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
 
       it 'メッセージがあること' do
         assert_select 'div.chat_form' do
-          assert_select 'div.panel-body[data-room_id=?]', resource.id.to_s do
+          assert_select 'div.panel-body[data-room_id=?]#messages', resource.id.to_s do
             assert_select 'div.message div.bms_message_content:nth-child(1)', messages.first.content.to_s
           end
         end
@@ -41,7 +41,7 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
       it 'テキストボックスがあること' do
         assert_select 'form.form-group' do
           assert_select 'div.col-sm-11' do
-            assert_select 'textarea[type="text"].form-control'
+            assert_select 'textarea.form-control[type="text"][placeholder="テキストを入力してください。"]'
           end
         end
       end

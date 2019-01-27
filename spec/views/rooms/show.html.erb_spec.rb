@@ -14,7 +14,7 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
     render
   end
 
-  context 'チャットフォーム' do
+  context 'チャットパネル' do
     context 'ヘッダー' do
       it 'チャットルーム名があること' do
         assert_select 'div.chat_form' do
@@ -76,12 +76,12 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
             assert_select 'i[class=?]', 'glyphicon glyphicon-copy'
           end
         end
-      end
 
-      it '新しくファイルを作成しますのポップアップメッセージがあること' do
-        assert_select 'ul.table-add-list li' do
-          assert_select 'a[title=?]', '新しくファイルを作成します'
-          assert_select 'a[data-toggle=?]', 'tooltip'
+        it '新しくファイルを作成しますのポップアップメッセージがあること' do
+          assert_select 'ul.table-add-list li' do
+            assert_select 'a[title=?]', '新しくファイルを作成します'
+            assert_select 'a[data-toggle=?]', 'tooltip'
+          end
         end
       end
     end

@@ -45,13 +45,13 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
   context 'テーブルヘッダ' do
     it 'ファイル名があること' do
       assert_select 'table.table' do
-        assert_select 'thead th', text: 'ファイル名', count: 1
+        assert_select 'thead th.text-center', text: 'ファイル名', count: 1
       end
     end
 
     it '備考があること' do
       assert_select 'table.table' do
-        assert_select 'thead th', text: '備考', count: 1
+        assert_select 'thead th.text-center', text: '備考', count: 1
       end
     end
   end

@@ -10,7 +10,7 @@ RSpec.describe FoldersController, type: :routing do
   end
 
   it 'routes to #new' do
-    expect(get: 'folders/new').to route_to('folders#new')
+    expect(get: '/folders/new').to route_to('folders#new')
   end
 
   it 'routes to #edit' do

@@ -23,7 +23,7 @@ RSpec.describe 'folders/_folder_table.html.erb', type: :view do
       end
     end
 
-    it '備考があること' do
+    it '編集があること' do
       assert_select 'table.table' do
         assert_select 'thead th', text: '編集', count: 1
       end

@@ -98,5 +98,15 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
         end
       end
     end
+
+    it 'リンク付きの削除アイコンがあること' do
+      documents.each do |document|
+        assert_select 'table.table' do
+          assert_select 'tbody td:nth-child(4) a[href=?][data-method="delete"]', room_document_path(resource, document) do
+            assert_select 'i[class=?]', 'glyphicon glyphicon-trash'
+          end
+        end
+      end
+    end
   end
 end

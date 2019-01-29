@@ -17,6 +17,7 @@
       <tr>
         <th class='text-center'>ファイル名</th>
         <th class='text-center'>備考</th>
+        <th class='text-center' style='width: 60px;'>編集</th>
       </tr>
     </thead>
 
@@ -29,6 +30,17 @@
 
           <td>
             <%= document.description %>
+          </td>
+
+          <td class='text-center'>
+            <% if edit_permission_exist?(document) %>
+              <a href="<%= edit_room_document_path(resource, document) %>"
+                data-remote='true'
+                data-toggle="tooltip" data-placement="top"
+                title='編集するにはクリックしてください'>
+                <i style='font-size: 18px;' class='glyphicon glyphicon-edit'></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       </tbody>

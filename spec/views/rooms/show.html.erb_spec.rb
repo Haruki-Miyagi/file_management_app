@@ -8,6 +8,7 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
   let(:documents) { create_list(:document, 3, user_id: user.id, room_id: resource.id) }
 
   before do
+    allow(view).to receive(:current_user).and_return(user)
     assign(:resource, resource)
     assign(:messages, messages)
     assign(:documents, documents)

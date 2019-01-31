@@ -46,19 +46,25 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
   context 'テーブルヘッダ' do
     it 'ファイル名があること' do
       assert_select 'table.table' do
-        assert_select 'thead th.text-center', text: 'ファイル名', count: 1
+        assert_select 'thead th:nth-child(1).text-center', text: 'ファイル名', count: 1
       end
     end
 
     it '備考があること' do
       assert_select 'table.table' do
-        assert_select 'thead th.text-center', text: '備考', count: 1
+        assert_select 'thead th:nth-child(2).text-center', text: '備考', count: 1
       end
     end
 
     it '編集があること' do
       assert_select 'table.table' do
-        assert_select 'thead th.text-center', text: '編集', count: 1
+        assert_select 'thead th:nth-child(3).text-center', text: '編集', count: 1
+      end
+    end
+
+    it '削除があること' do
+      assert_select 'table.table' do
+        assert_select 'thead th:nth-child(4).text-center', text: '削除', count: 1
       end
     end
   end
@@ -67,7 +73,7 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
     it 'リンク付きのファイルのテキストがあること' do
       documents.each do |document|
         assert_select 'table.table' do
-          assert_select 'tbody td', text: document.file_name
+          assert_select 'tbody td:nth-child(1)', text: document.file_name
         end
       end
     end
@@ -75,7 +81,7 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
     it '備考のテキストがあること' do
       documents.each do |document|
         assert_select 'table.table' do
-          assert_select 'tbody td', text: document.description
+          assert_select 'tbody td:nth-child(2)', text: document.description
         end
       end
     end
@@ -84,7 +90,7 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
       it 'リンク付きの編集アイコンがあること' do
         documents.each do |document|
           assert_select 'table.table' do
-            assert_select 'tbody td a[href=?]', edit_room_document_path(resource, document) do
+            assert_select 'tbody td:nth-child(3) a[href=?]', edit_room_document_path(resource, document) do
               assert_select 'i[class=?]', 'glyphicon glyphicon-edit'
             end
           end

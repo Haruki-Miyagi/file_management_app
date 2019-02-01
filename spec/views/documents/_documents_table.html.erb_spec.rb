@@ -11,38 +11,6 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
     render partial: 'documents/documents_table', locals: { resource: resource, documents: documents }
   end
 
-  context '追加ボタン' do
-    context 'ファイル' do
-      context 'ファイル追加ボタン' do
-        it 'リンク付きであること' do
-          assert_select 'ul.table-add-list li' do
-            assert_select 'a[href=?]', "/rooms/#{resource.id}/documents/new"
-            assert_select 'a', text: '+'
-            assert_select 'i[class=?]', 'glyphicon glyphicon-copy'
-          end
-        end
-      end
-
-      it '新しくファイルを作成しますのポップアップメッセージがあること' do
-        assert_select 'ul.table-add-list li' do
-          assert_select 'a[title=?]', '新しくファイルを作成します'
-          assert_select 'a[data-toggle=?]', 'tooltip'
-        end
-      end
-    end
-
-    context 'ポップアップメッセージ' do
-      it 'スクリプトがあること' do
-        assert_select 'script', /data-toggle/
-        assert_select 'script', /tooltip/
-      end
-
-      it 'pcとモバイルで表示法をわけてあること' do
-        assert_select 'script', /navigator.userAgent/
-      end
-    end
-  end
-
   context 'テーブルヘッダ' do
     it 'ファイル名があること' do
       assert_select 'table.table' do

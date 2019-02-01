@@ -39,6 +39,14 @@ RSpec.describe 'documents/_form.html.erb', type: :view do
     assert_select 'input[type="file"][name=?]', 'document[file_date]'
   end
 
+  context 'ファイル更新のとき' do
+    let!(:document) { create(:document) }
+
+    it '保存してあるファイル名が表示されること' do
+      assert_select 'div.form-group p', text: "保存ファイル：#{document[:uploaded_file]}"
+    end
+  end
+
   it '備考入力欄があること' do
     assert_select 'label[for="document_description"]', text: '備考'
     assert_select 'textarea.form-control[name=?]', 'document[description]'

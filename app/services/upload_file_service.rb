@@ -19,12 +19,13 @@ class UploadFileService
 
   private
 
+  # 保存させたいファイル名に拡張子をつけた形にする
   def change_file_name(file_name, uploaded_file)
     return nil if uploaded_file.blank?
 
     if file_name.present?
       extname = File.extname(uploaded_file.original_filename)
-      file_name + extname
+      File.basename(file_name, '.*') + extname
     else
       uploaded_file.original_filename
     end

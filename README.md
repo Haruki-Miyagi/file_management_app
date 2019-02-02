@@ -1,24 +1,101 @@
-# README
+#### ファイル管理アプリ(モバイル対応可)
+L グループ(科目)単位でファイルを管理しチャット機能をつけることでグループごとの記録を残す。
+* 次この授業を参加したい or どの様な内容を勉強しているのか をファイル管理機能,チャット機能を追加することで実際の授業の内容の過程を見る事ができる。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[ 作成理由 ] 
+* 長期的に学校の継続していくためには学校での単位取得が必要不可欠である。しかし現状では友達同士のグループで協力範囲がちいさくなりがちであるこれを授業の科目単位(ある条件での組織(グループ))で科目間で授業の流れなどの活動(ファイルやどのようなことをしたかなどのチャットでのコミュニケーション)を記録する事で現在受けていることを時系列で把握できる。
+他にも過去資料を再利用することにより資料作成が効率化されることや，活動計画の立案において参考にする場合などがあるなどの効果があると考える。
 
-Things you may want to cover:
+* 見える形にすると学校での退学率を減らすことにもつながる。
+* L 受けたい科目や学びたい授業内容と違うことで大学が楽しくなくなったりしてしまうと考える。
+そこで私は誰もが授業の内容（どのようなことを勉強しているのか)やチャットを利用することで勉強の過程などを残しておくことで大学生活が楽しくなり退学率が下がるのではないかと考え作成する。
 
-* Ruby version
+#### 大まかな仕様確認
+* フォルダ/ファイルは誰でも作成可能（編集は作成者と管理者のみ)
+  * [ 追加 ]はみんなで共有できる仕様 
+  * [ 編集, 削除 ]は権限を持つ人物またはフォルダ/ファイルの作成者限定
+* 管理者
+  * 仕様はアプリを作成時にのみ作成予定
+  * L ファイルをツリー構造のtop(rootフォルダ)にするために作成する
+* ファイル管理 or チャット機能は同じ画面
+  * Room(部屋)としてまとめる
 
-* System dependencies
 
-* Configuration
+#### プラットフォーム
+* データベースはpostgresを利用
+* フレームワークは ruby on rails 5.2.2 (ruby 2.5.0)
+* viewは html css を利用
 
-* Database creation
 
-* Database initialization
+#### 機能仕様
 
-* How to run the test suite
+* ログイン/ログアウト/アカウントの編集ができる
+* フォルダの作成、編集、削除
+* ファイルを管理するためのRoomの作成(ファイル管理とチャット機能を同じ画面で表示する)
+* フォルダ一覧は多くなる可能性があるのでajax化する
 
-* Services (job queues, cache servers, search engines, etc.)
+### テーブル
+#### usersテーブル(deviseを使用)
+| カラム      |型           | 備考          |
+|:-----------|------------:|:------------:|
+| id         |integer      |_             |
+| email      |string       |_             |
+|password    |string    |_             |
+|admin       |boolean      |_             |
+| created_at |datetime     |_             |
+|updated_at  |datetime     |_             |
 
-* Deployment instructions
+#### folderテーブル
+| カラム      |型           |備考                     |
+|:-----------|------------:|:----------------------:|
+|name        |string       |null: false, index: true|
+|description |text         |index: true             |
+|ancestry    |string       |foreign_key: true       |
+|user_id     |references   |foreign_key: true       |
 
-* ...
+* 誰がフォルダを作成したか(作成したuserと関連づいている)
+* フォルダの階層化ができているか
+* 作成後のリダイレクト先(作成または編集したフォルダの親ファイル)に移行する
+  * L 自身がなんのフォルダを作成したかが可視化できるため
+  * L 作成したフォルダ内を表示すると作成した事実を可視化できないそれを避けるため
+
+
+#### roomテーブル(ファイル管理フォルダ)
+|カラム       |型            |備考                    |
+|:-----------|------------:|:----------------------:|
+|name        |string       |null: false, index: true|
+|description |text         |index: true             |
+|folder      |references   |foreign_key: true       |
+|folder      |references   |foreign_key: true       |
+
+* 誰がファイル管理フォルダを作成したか(作成したuserと関連づいている)
+* ファイル管理フォルダの階層化ができているか
+* 作成後のリダイレクト先(作成または編集したファイル管理フォルダの親ファイル)に移行する
+  * L フォルダと同様
+
+
+
+#### documentテーブル
+|カラム        |型           |備考                          |
+|:----------- |------------:|:---------------------------:|
+|file_name    |string       |null: false, index: true     |
+|uploaded_file|string       |null: false                  |
+|description  |text         |index: true                  |
+|user_id     |references   |index: true, foreign_key: true|
+|room_id     |references   |index: true, foreign_key: true|
+
+* 誰がファイル管理フォルダを作成したか(作成したuserと関連づいている)
+* ファイル管理用
+* 作成後のリダイレクト先(作成または編集したファイル管理フォルダの親ファイル)に移行する
+  * L フォルダと同様
+* ファイルのダウンロード
+
+#### messageテーブル(チャットのメッセージ)
+|カラム       |型            |備考                          |
+|:-----------|------------:|:----------------------------:|
+|content     |string       |null: false                   |
+|user_id     |references   |index: true, foreign_key: true|
+|room_id     |references   |index: true, foreign_key: true|
+
+* チャットで使用する
+  * L Actioncableを利用してリアルタイムチャットにする

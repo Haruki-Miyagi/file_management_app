@@ -1,0 +1,22 @@
+<div class='breadcrumbs'>
+  <%= link_to 'Home', folders_path %> &rsaquo;
+</div>
+
+<%= render partial: 'add_folder', locals: { resource: @resource } %>
+<%= render partial: 'folder_table', locals: { resources: @resources } %>
+
+<div id='folder-modal' class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'></div>
+<div id='room-modal' class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'></div>
+
+<script>
+  $(function () {
+    var ua = navigator.userAgent;
+    if (ua.indexOf('iPhone') > 0  ||
+        ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0 ||
+        (ua.indexOf('iPad') > 0   || ua.indexOf('Android') > 0)) {
+      $('[data-toggle="tooltip"]').tooltip('hide')
+    } else {
+      $('[data-toggle="tooltip"]').tooltip()
+    }
+  })
+</script>

@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      room: ファイル管理
+    attributes:
+      room:
+        name: ファイル管理名
+        description: 備考
+  errors:
+    messages:
+      blank: "が記入されていません。"

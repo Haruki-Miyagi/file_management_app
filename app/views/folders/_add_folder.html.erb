@@ -1,0 +1,19 @@
+<ul class='clearfix table-add-list'>
+  <li style='float: right;'>
+    <a href="<%= new_room_path(folder_id: resource.id) %>"
+      data-remote='true' class='btn btn-primary' style='margin: 20px 0;'
+      data-toggle="tooltip" data-placement="top"
+      title='新しくファイル管理フォルダを作成します'>
+      + <i class='glyphicon glyphicon-list-alt'></i>
+    </a>
+  </li>
+
+  <li style='float: right; margin: 0 30px 0 0;'>
+    <a href="<%= new_folder_path(parent_id: resource.id) %>"
+      data-remote='true' class='btn btn-primary' style='margin: 20px 0;'
+      data-toggle="tooltip" data-placement="top"
+      title='新しくフォルダを作成します'>
+      + <i class='glyphicon glyphicon-folder-close'></i>
+    </a>
+  </li>
+</ul>

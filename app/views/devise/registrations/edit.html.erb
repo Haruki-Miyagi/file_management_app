@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-sm-6">
-  <h2 class='text-center'>アカウント編集</h2>
-  <br/>
+  <div class="col-sm-6 col-sm-offset-2">
+    <h2 class='text-center'>アカウント編集</h2>
+    <br/>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
+      <%= resource_error_messages!(resource) %>
 
       <div class="form-group">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: 'form-control' %>
@@ -24,7 +24,7 @@
       </div>
 
       <div class="form-group">
-      <span style='color: red; font-weight: bold;'>[確認用]</span>
+        <span style='color: red; font-weight: bold;'>[確認用]</span>
         <%= f.label :password_confirmation, '現在のパスワードを入力してください' %><br />
         <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", class: 'form-control' %>
       </div>

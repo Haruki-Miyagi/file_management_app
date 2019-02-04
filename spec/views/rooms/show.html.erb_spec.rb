@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'rooms/show.html.erb', type: :view do
-  let(:user) { create(:user, :admin) }
-  let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
-  let(:resource) { create(:room, user_id: user.id, folder_id: root.id) }
-  let(:messages) { create_list(:message, 3, user_id: user.id, room_id: resource.id) }
-  let(:documents) { create_list(:document, 3, user_id: user.id, room_id: resource.id) }
+  let(:admin_user) { create(:user, :admin) }
+  let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
+  let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
+  let(:messages) { create_list(:message, 3, user_id: admin_user.id, room_id: resource.id) }
+  let(:documents) { create_list(:document, 3, user_id: admin_user.id, room_id: resource.id) }
 
   before do
+    allow(view).to receive(:current_user).and_return(admin_user)
     assign(:resource, resource)
     assign(:messages, messages)
     assign(:documents, documents)
@@ -27,7 +28,7 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
       it 'メールアドレスがあること' do
         assert_select 'div.chat_form' do
           assert_select 'div.panel-body[data-room_id=?]', resource.id.to_s do
-            assert_select 'div.col-md-4:nth-child(1)', user.email.to_s
+            assert_select 'div.col-md-4:nth-child(1)', admin_user.email.to_s
           end
         end
       end
@@ -117,6 +118,18 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
         assert_select 'thead th', text: '備考', count: 1
       end
     end
+
+    it '編集があること' do
+      assert_select 'table.table' do
+        assert_select 'thead th.text-center', text: '編集', count: 1
+      end
+    end
+
+    it '削除があること' do
+      assert_select 'table.table' do
+        assert_select 'thead th.text-center', text: '削除', count: 1
+      end
+    end
   end
 
   context 'テーブル本体' do
@@ -132,6 +145,35 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
       documents.each do |document|
         assert_select 'table.table' do
           assert_select 'tbody td', text: document.description
+        end
+      end
+    end
+
+    context '編集' do
+      it 'リンク付きの編集アイコンがあること' do
+        documents.each do |document|
+          assert_select 'table.table' do
+            assert_select 'tbody td a[href=?]', edit_room_document_path(resource, document) do
+              assert_select 'i[class=?]', 'glyphicon glyphicon-edit'
+            end
+          end
+        end
+      end
+
+      it 'ポップアップメッセージがあること' do
+        assert_select 'table.table td' do
+          assert_select 'a[title=?]', '編集するにはクリックしてください'
+          assert_select 'a[data-toggle=?]', 'tooltip'
+        end
+      end
+    end
+
+    it 'リンク付きの削除アイコンがあること' do
+      documents.each do |document|
+        assert_select 'table.table' do
+          assert_select 'tbody td a[href=?][data-method="delete"]', room_document_path(resource, document) do
+            assert_select 'i[class=?]', 'glyphicon glyphicon-trash'
+          end
         end
       end
     end

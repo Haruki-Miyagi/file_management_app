@@ -65,7 +65,7 @@ module CrudActionsMixin
     @resource = model_name.new
   end
 
-  # レコードを保存できたときのリダイレクトパスを指定する
+  # リダイレクトパスを指定する
   def redirect_path_for_crud
     @redirect_path = request.referer.presence || folders_path
   end

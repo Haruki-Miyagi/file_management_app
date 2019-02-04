@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
-  let(:user) { create(:user, :admin) }
-  let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
-  let(:resource) { create(:room, user_id: user.id, folder_id: root.id) }
-  let(:messages) { create_list(:message, 3, user_id: user.id, room_id: resource.id) }
+  let(:admin_user) { create(:user, :admin) }
+  let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
+  let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
+  let(:messages) { create_list(:message, 3, user_id: admin_user.id, room_id: resource.id) }
 
   before do
     render partial: 'rooms/chat_room', locals: { resource: resource, messages: messages }
@@ -23,7 +23,7 @@ RSpec.describe 'rooms/_chat_room.html.erb', type: :view do
       it 'メールアドレスがあること' do
         assert_select 'div.chat_form' do
           assert_select 'div.panel-body[data-room_id=?]#messages', resource.id.to_s do
-            assert_select 'div.message div.col-md-4:nth-child(1)', user.email.to_s
+            assert_select 'div.message div.col-md-4:nth-child(1)', admin_user.email.to_s
           end
         end
       end

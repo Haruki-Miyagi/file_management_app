@@ -33,6 +33,17 @@ RSpec.describe 'folders/show.html.erb', type: :view do
           end
         end
       end
+
+      context 'ポップアップメッセージ' do
+        it 'スクリプトがあること' do
+          assert_select 'script', /data-toggle/
+          assert_select 'script', /tooltip/
+        end
+
+        it 'pcとモバイルで表示法をわけてあること' do
+          assert_select 'script', /navigator.userAgent/
+        end
+      end
     end
   end
 

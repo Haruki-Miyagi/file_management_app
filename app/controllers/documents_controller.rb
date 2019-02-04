@@ -8,6 +8,11 @@ class DocumentsController < ApplicationController
     UploadFileService.new(documents_params).define_params
   end
 
+  def set_resource
+    @resource = model_name.find(params[:id])
+    @room = @resource.room
+  end
+
   def new_resource
     @room = Room.find(params[:room_id])
     @resource = model_name.new

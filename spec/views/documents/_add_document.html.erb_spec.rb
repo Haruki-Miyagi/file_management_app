@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'documents/_add_document.html.erb', type: :view do
-  let(:user) { create(:user, :admin) }
-  let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
-  let(:resource) { create(:room, user_id: user.id, folder_id: root.id) }
+  let(:admin_user) { create(:user, :admin) }
+  let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
+  let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
 
   before do
     render partial: 'documents/add_document', locals: { resource: resource }

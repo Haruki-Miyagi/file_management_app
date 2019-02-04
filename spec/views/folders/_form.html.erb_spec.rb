@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'folders/_form.html.erb', type: :view do
-  let(:user) { create(:user, :admin) }
-  let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
+  let(:admin_user) { create(:user, :admin) }
+  let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
   let(:folder) { create(:folder, parent_id: root.id) }
 
   before do
-    allow(view).to receive(:current_user).and_return(user)
+    allow(view).to receive(:current_user).and_return(admin_user)
     render partial: 'folders/form', locals: { resource: folder }
   end
 
@@ -23,7 +23,7 @@ RSpec.describe 'folders/_form.html.erb', type: :view do
   it 'フォームを表示すること' do
     assert_select 'form[action=?][method="post"]', "/folders/#{folder.id}" do
       assert_select 'input[type=hidden][value=?]#folder_parent_id', root.id.to_s
-      assert_select 'input[type=hidden][value=?]#folder_user_id', user.id.to_s
+      assert_select 'input[type=hidden][value=?]#folder_user_id', admin_user.id.to_s
       assert_select 'input[type="submit"]'
     end
   end

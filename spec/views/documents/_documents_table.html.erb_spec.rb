@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'documents/_documents_table.html.erb', type: :view do
-  let(:user) { create(:user, :admin) }
-  let(:root) { create(:folder, name: 'Root', description: 'Root Folder') }
-  let(:resource) { create(:room, user_id: user.id, folder_id: root.id) }
-  let(:documents) { create_list(:document, 3, user_id: user.id, room_id: resource.id) }
+  let(:admin_user) { create(:user, :admin) }
+  let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
+  let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
+  let(:documents) { create_list(:document, 3, user_id: admin_user.id, room_id: resource.id) }
 
   before do
-    allow(view).to receive(:current_user).and_return(user)
+    allow(view).to receive(:current_user).and_return(admin_user)
     render partial: 'documents/documents_table', locals: { resource: resource, documents: documents }
   end
 

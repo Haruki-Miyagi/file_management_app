@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :folders
   resources :rooms, except: %i[index] do
-    resources :documents, except: %i[index show]
+    resources :documents, except: %i[index]
   end
 
   devise_for :users, only: %i[sign_in sign_up sessions registrations]

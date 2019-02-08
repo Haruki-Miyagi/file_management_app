@@ -1,0 +1,39 @@
+<h2><%= @resource.file_name %>ファイルの詳細</h2>
+<h3>
+  <%= link_to room_path(@room), class: "btn btn-primary" do %>
+    <i class='glyphicon glyphicon-menu-left'></i>
+    ファイル管理一覧
+  <% end %>
+</h3>
+
+<div id='document-modal' class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'></div>
+
+
+<div class="row">
+  <div>
+    <div class="thumbnail">
+      <%= @resource.image? ? (image_tag @resource.uploaded_file.to_s) : 'プレビューは表示されません。' %>
+      <div class="caption">
+        <h4>備考欄</h4>
+        <p><%= simple_format(@resource.description) %></p>
+        <p>
+          <% if edit_permission_exist?(@resource) %>
+            <a href="<%= edit_room_document_path(@room, @resource) %>"
+              data-remote='true'
+              data-toggle="tooltip" data-placement="top"
+              title='編集するにはクリックしてください'
+              class='btn btn-default active'>
+              <i style='font-size: 18px;' class='glyphicon glyphicon-edit'></i>
+            </a>
+          <% end %>
+
+          <% if edit_permission_exist?(@resource) %>
+            <%= link_to [@room, @resource], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default active' do %>
+              <i style='font-size: 18px; color: #EC5800;' class='glyphicon glyphicon-trash'></i>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

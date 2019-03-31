@@ -39,7 +39,7 @@ RSpec.describe Document, type: :model do
         )
       end
 
-      it '' do
+      it '許可しないこと' do
         expect(document.image?).to be_blank
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe Document, type: :model do
         )
       end
 
-      it '' do
+      it '許可すること' do
         expect(document.image?).to be_present
       end
     end

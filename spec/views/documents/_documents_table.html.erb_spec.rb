@@ -41,7 +41,9 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
     it 'リンク付きのファイルのテキストがあること' do
       documents.each do |document|
         assert_select 'table.table' do
-          assert_select 'tbody td:nth-child(1)', text: document.file_name
+          assert_select 'tbody td:nth-child(1)' do
+            assert_select 'a[href=?]', room_document_path(resource, document), text: document.file_name
+          end
         end
       end
     end

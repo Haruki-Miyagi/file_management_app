@@ -1,6 +1,12 @@
 class DocumentsController < ApplicationController
   include CrudActionsMixin
 
+  before_action :set_resource, only: %i[show edit update destroy download] # rubocop:disable Rails/LexicallyScopedActionFilter
+
+  def download
+    send_file(@resource.uploaded_file.current_path)
+  end
+
   private
 
   def resource_params

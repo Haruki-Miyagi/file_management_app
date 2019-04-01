@@ -6,6 +6,12 @@ RSpec.describe DocumentsController, type: :routing do
   let(:room) { create(:room, user_id: admin_user.id, folder_id: root.id) }
   let(:document) { create(:document, user_id: admin_user.id, room_id: room.id) }
 
+  it 'routes to #show' do
+    expect(get: "/rooms/#{room.id}/documents/#{document.id}").to route_to(
+      'controller' => 'documents', 'action' => 'show', 'room_id' => room.id.to_s, 'id' => document.id.to_s
+    )
+  end
+
   it 'routes to #new' do
     expect(get: "/rooms/#{room.id}/documents/new").to route_to(
       'controller' => 'documents', 'action' => 'new', 'room_id' => room.id.to_s

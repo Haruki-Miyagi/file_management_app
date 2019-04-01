@@ -28,4 +28,32 @@ RSpec.describe Document, type: :model do
       expect(Document.order_by_preference.pluck(:id)).to eq(expect_value)
     end
   end
+
+  describe 'image?' do
+    let(:document) { create(:document, uploaded_file: uploaded_file) }
+
+    context '指定以外の拡張子の場合' do
+      let(:uploaded_file) do
+        Rack::Test::UploadedFile.new(
+          Rails.root.join('spec', 'up_folder', 'file01.xlsx'), 'application/vnd.ms-excel'
+        )
+      end
+
+      it '許可しないこと' do
+        expect(document.image?).to be_blank
+      end
+    end
+
+    context '指定の拡張子の場合' do
+      let(:uploaded_file) do
+        Rack::Test::UploadedFile.new(
+          Rails.root.join('spec', 'up_folder', 'pdffile01.png'), 'image/png'
+        )
+      end
+
+      it '許可すること' do
+        expect(document.image?).to be_present
+      end
+    end
+  end
 end

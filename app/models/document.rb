@@ -6,4 +6,16 @@ class Document < ApplicationRecord
   belongs_to :room
 
   scope :order_by_preference, -> { order(id: :desc) }
+
+  ALLOW_DISPLAY_IMAGE = %w(
+    .jpg
+    .jpeg
+    .png
+    .gif
+  ).freeze
+
+  # `.jpg, .jpeg, .png, gif` のプレビュー画像を許可する
+  def image?
+    ALLOW_DISPLAY_IMAGE.include?(File.extname(uploaded_file.url).downcase)
+  end
 end

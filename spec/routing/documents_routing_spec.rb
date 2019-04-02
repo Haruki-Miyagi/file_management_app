@@ -41,4 +41,10 @@ RSpec.describe DocumentsController, type: :routing do
       'controller' => 'documents', 'action' => 'destroy', 'room_id' => room.id.to_s, 'id' => document.id.to_s
     )
   end
+
+  it 'routes to #download' do
+    expect(get: "/rooms/#{room.id}/documents/#{document.id}/download").to route_to(
+      'controller' => 'documents', 'action' => 'download', 'room_id' => room.id.to_s, 'id' => document.id.to_s
+    )
+  end
 end

@@ -48,6 +48,18 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
       end
     end
 
+    it 'ダウンロード用のリンク付きアイコンがあること' do
+      documents.each do |document|
+        assert_select 'table.table' do
+          assert_select 'tbody td:nth-child(1)' do
+            assert_select 'a[href=?]', "/rooms/#{resource.id}/documents/#{document.id}/download" do
+              assert_select 'i[class=?]', 'glyphicon glyphicon-download'
+            end
+          end
+        end
+      end
+    end
+
     it '備考のテキストがあること' do
       documents.each do |document|
         assert_select 'table.table' do

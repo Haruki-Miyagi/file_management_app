@@ -14,6 +14,9 @@
         <tr>
           <td>
             <%= link_to document.file_name, [resource, document] %>
+            <%= link_to "/rooms/#{resource.id}/documents/#{document.id}/download", method: :get do %>
+              <i class='glyphicon glyphicon-download' style='float: right;'></i>
+            <% end %>
           </td>
 
           <td>

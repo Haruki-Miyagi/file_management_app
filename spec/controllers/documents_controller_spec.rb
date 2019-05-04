@@ -21,6 +21,35 @@ RSpec.describe DocumentsController, type: :controller do
     end
   end
 
+  describe 'GET #download' do
+    let(:document) { create(:document, room_id: resource.id) }
+
+    def do_render
+      get :download, params: { room_id: resource.id, id: document.id }
+    end
+
+    context 'サインインしている時' do
+      before do
+        sign_in(admin_user)
+        do_render
+      end
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'assigns @resource' do
+        expect(assigns(:resource)).to eq(document)
+      end
+
+      it 'assigns @room' do
+        expect(assigns(:room)).to eq(resource)
+      end
+    end
+
+    include_examples 'サインインしていない時'
+  end
+
   describe 'GET #new' do
     def do_render
       get :new, params: { room_id: resource.id }
@@ -137,8 +166,6 @@ RSpec.describe DocumentsController, type: :controller do
         room_id: room_id
       }
     end
-
-    let(:document) { create(:document) }
 
     def do_render
       patch :update, params: { room_id: resource.id, id: document.id, document: new_attributes }

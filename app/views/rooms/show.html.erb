@@ -3,3 +3,11 @@
 <%= render partial: 'chat_room', locals: { resource: @resource, messages: @messages } %>
 <%= render partial: 'documents/add_document', locals: { resource: @resource } %>
 <%= render partial: 'documents/documents_table', locals: { resource: @resource, documents: @documents } %>
+
+<script>
+  // リロードした時にファイル管理にあるメッセージスクロールテーブルを一番最新のメッセージまでスクロールする
+  $(document).ready(function(){
+    height = $('.scroll-bar')[0].scrollHeight
+    $('.scroll-bar').scrollTop(height)
+  });
+</script>

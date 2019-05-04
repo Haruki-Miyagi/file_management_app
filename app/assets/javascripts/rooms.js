@@ -1,9 +1,3 @@
-// リロードした時にファイル管理にあるメッセージスクロールテーブルを一番最新のメッセージまでスクロールする
-$(document).ready(function(){
-  height = $('.scroll-bar')[0].scrollHeight
-  $('.scroll-bar').scrollTop(height)
-});
-
 // テキストエリアを入力し改行した時に自動的に改行する
 $(function() {
   var $textarea = $('textarea.form-control');

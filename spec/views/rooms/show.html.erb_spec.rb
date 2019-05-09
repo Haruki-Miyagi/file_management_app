@@ -5,10 +5,11 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
   let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
   let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
   let(:messages) { create_list(:message, 3, user_id: admin_user.id, room_id: resource.id) }
-  let(:documents) { create_list(:document, 3, user_id: admin_user.id, room_id: resource.id) }
+  let(:documents) { create_list(:document, 30, user_id: admin_user.id, room_id: resource.id) }
 
   before do
     allow(view).to receive(:current_user).and_return(admin_user)
+    allow(view).to receive_messages(will_paginate: nil)
     assign(:resource, resource)
     assign(:messages, messages)
     assign(:documents, documents)

@@ -1,5 +1,5 @@
 <div class='table-responsive'>
-  <table class='table table-striped table-bordered table-hover'>
+  <table class='table table-striped table-bordered table-hover' id="feed">
     <thead>
       <tr>
         <th class='text-center'>ファイル名</th>
@@ -8,41 +8,10 @@
         <th class='text-center' style='width: 60px;'>削除</th>
       </tr>
     </thead>
+    <%= render partial: 'documents/document_table_body', locals: { resource: @resource, documents: @documents } %>
 
-    <% documents.each do |document| %>
-      <tbody>
-        <tr>
-          <td>
-            <%= link_to document.file_name, [resource, document] %>
-            <%= link_to "/rooms/#{resource.id}/documents/#{document.id}/download", method: :get do %>
-              <i class='glyphicon glyphicon-download' style='float: right;'></i>
-            <% end %>
-          </td>
-
-          <td>
-            <%= document.description %>
-          </td>
-
-          <td class='text-center'>
-            <% if edit_permission_exist?(document) %>
-              <a href="<%= edit_room_document_path(resource, document) %>"
-                data-remote='true'
-                data-toggle="tooltip" data-placement="top"
-                title='編集するにはクリックしてください'>
-                <i style='font-size: 18px;' class='glyphicon glyphicon-edit'></i>
-              </a>
-            <% end %>
-          </td>
-
-          <td class='text-center'>
-            <% if edit_permission_exist?(document) %>
-              <%= link_to [resource, document], method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <i style='font-size: 18px; color: #EC5800;' class='glyphicon glyphicon-trash'></i>
-              <% end %>
-            <% end %>
-          </td>
-        </tr>
-      </tbody>
-    <% end %>
+    <div class="infinite-scroll">
+      <%= will_paginate @documents %>
+    </div>
   </table>
 </div>

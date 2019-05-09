@@ -1,0 +1,3 @@
+$('#feed').append('<%= j render partial: 'documents/document_table_body', \
+                                locals: { resource: @resource, documents: @documents } %>');
+<%= render update_pagination_partial_path(@documents) %>

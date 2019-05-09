@@ -3,7 +3,11 @@ class RoomsController < ApplicationController
 
   def show
     @messages = @resource.messages
-    @documents = @resource.documents.order_by_preference
+    @documents = @resource.documents.order_by_preference.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'rooms/rooms_pagination_page' }
+    end
   end
 
   private

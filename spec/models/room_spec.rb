@@ -19,5 +19,6 @@ RSpec.describe Room, type: :model do
     it { is_expected.to belong_to(:folder).class_name('Folder') }
     it { is_expected.to have_many(:documents).class_name('Document') }
     it { is_expected.to have_many(:messages).class_name('Message') }
+    it { is_expected.to have_many(:user_controll_rooms).class_name('UserControllRoom') }
   end
 end

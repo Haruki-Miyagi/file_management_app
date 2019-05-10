@@ -2,7 +2,7 @@
 
 <%= render partial: 'chat_room', locals: { resource: @resource, messages: @messages } %>
 <%= render partial: 'documents/add_document', locals: { resource: @resource } %>
-<%= render partial: 'documents/documents_table', locals: { resource: @resource, documents: @documents } %>
+<%= render partial: 'documents/documents_table' %>
 
 <script>
   // リロードした時にファイル管理にあるメッセージスクロールテーブルを一番最新のメッセージまでスクロールする

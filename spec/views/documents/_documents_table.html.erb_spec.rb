@@ -4,9 +4,12 @@ RSpec.describe 'documents/_documents_table.html.erb', type: :view do
   let(:admin_user) { create(:user, :admin) }
   let(:root) { create(:folder, name: 'Root', description: 'Root Folder', user_id: admin_user.id) }
   let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
-  let(:documents) { create_list(:document, 3, user_id: admin_user.id, room_id: resource.id) }
+  let(:documents) { create_list(:document, 31, user_id: admin_user.id, room_id: resource.id) }
 
   before do
+    assign(:documents, documents)
+    assign(:resource, resource)
+    allow(view).to receive_messages(will_paginate: nil)
     allow(view).to receive(:current_user).and_return(admin_user)
     render partial: 'documents/documents_table', locals: { resource: resource, documents: documents }
   end

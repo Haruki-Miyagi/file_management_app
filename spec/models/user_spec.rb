@@ -21,5 +21,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:rooms).class_name('Room') }
     it { is_expected.to have_many(:documents).class_name('Document') }
     it { is_expected.to have_many(:messages).class_name('Message') }
+    it { is_expected.to have_many(:user_controll_rooms).class_name('UserControllRoom') }
   end
 end

@@ -17,10 +17,11 @@ RSpec.describe User, type: :model do
   end
 
   describe 'association' do
-    it { is_expected.to have_many(:folders).class_name('Folder') }
-    it { is_expected.to have_many(:rooms).class_name('Room') }
-    it { is_expected.to have_many(:documents).class_name('Document') }
-    it { is_expected.to have_many(:messages).class_name('Message') }
-    it { is_expected.to have_many(:user_controll_rooms).class_name('UserControllRoom') }
+    it { is_expected.to have_many(:folders).class_name('Folder').dependent(:destroy) }
+    it { is_expected.to have_many(:rooms).class_name('Room').dependent(:destroy) }
+    it { is_expected.to have_many(:documents).class_name('Document').dependent(:destroy) }
+    it { is_expected.to have_many(:messages).class_name('Message').dependent(:destroy) }
+    it { is_expected.to have_many(:user_controll_rooms).class_name('UserControllRoom').dependent(:destroy) }
+    it { is_expected.to have_many(:pending_rooms) }
   end
 end

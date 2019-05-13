@@ -25,6 +25,7 @@ RSpec.describe RoomsController, type: :controller do
     let(:resource) { create(:room, user_id: admin_user.id, folder_id: root.id) }
     let(:messages) { create_list(:message, 3, room_id: resource.id) }
     let(:documents) { create_list(:document, 3, user_id: admin_user.id, room_id: resource.id) }
+    let!(:user_controll_room) { create(:user_controll_room, user_id: admin_user.id, room_id: resource.id) }
 
     def do_render
       get :show, params: { id: resource.id }
@@ -32,6 +33,7 @@ RSpec.describe RoomsController, type: :controller do
 
     context 'サインインしている時' do
       before do
+        allow(controller).to receive(:current_user).and_return(admin_user)
         sign_in(admin_user)
         do_render
       end
@@ -48,9 +50,13 @@ RSpec.describe RoomsController, type: :controller do
         expect(assigns(:messages)).to eq(messages)
       end
 
-      it 'assigns @messages' do
+      it 'assigns @documents' do
         expected_value = documents.reverse
         expect(assigns(:documents)).to eq(expected_value)
+      end
+
+      it 'assigns @user_controll_room' do
+        expect(assigns(:user_controll_room)).to eq(user_controll_room)
       end
 
       it 'renders the :show template' do

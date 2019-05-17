@@ -20,7 +20,7 @@ RSpec.describe HomesController, type: :controller do
 
       it 'assigns @resource' do
         do_render
-        expect(assigns(:resources)).to eq(user.pending_rooms)
+        expect(assigns(:resources)).to eq(user.pending_rooms.order(:id))
       end
     end
 

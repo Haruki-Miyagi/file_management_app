@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :user_controll_rooms, only: [:create, :destroy]
+
   devise_for :users, only: %i[sign_in sign_up sessions registrations]
-  root 'home#index'
+  root 'homes#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

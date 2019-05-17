@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
   def show
     @messages = @resource.messages
     @documents = @resource.documents.order_by_preference.paginate(page: params[:page])
+    @user_controll_room = UserControllRoom.find_by(user_id: current_user, room_id: @resource)
     respond_to do |format|
       format.html
       format.js { render partial: 'rooms/rooms_pagination_page' }

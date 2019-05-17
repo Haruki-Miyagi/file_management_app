@@ -16,6 +16,27 @@ RSpec.describe 'rooms/show.html.erb', type: :view do
     render
   end
 
+  context 'お気に入り登録' do
+    context '未登録のとき' do
+      it 'trueがかえること' do
+        assert_select 'a.btn.btn-primary[href=?]', user_controll_rooms_path(room_id: resource.id), text: 'お気に入り登録'
+      end
+    end
+
+    context '登録済みとき' do
+      let!(:user_controll_room) { create(:user_controll_room, user_id: admin_user.id, room_id: resource.id) }
+      before do
+        assign(:user_controll_room, user_controll_room)
+        render
+      end
+
+      it 'falseがかえること' do
+        assert_select 'a.btn.btn-default[href=?]', user_controll_room_path(user_controll_room, room_id: resource.id),
+                      text: 'お気に入りに登録済'
+      end
+    end
+  end
+
   context 'チャットパネル' do
     context 'ヘッダー' do
       it 'チャットルーム名があること' do

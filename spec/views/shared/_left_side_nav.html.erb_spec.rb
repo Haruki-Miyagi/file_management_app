@@ -10,4 +10,10 @@ RSpec.describe 'shared/_left_side_nav.html.erb', type: :view do
       assert_select 'a[href=?]', folders_path, text: 'フォルダ管理'
     end
   end
+
+  it 'お気に入り登録ファイルへのリンクがあること' do
+    assert_select 'nav#l-side-main-menu ul li' do
+      assert_select 'a[href=?]', root_path, text: 'お気に入り登録ファイル'
+    end
+  end
 end

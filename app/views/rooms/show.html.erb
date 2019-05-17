@@ -1,5 +1,13 @@
 <% breadcrumb :room, @resource %>
 
+<div style='padding: 10px 0;'>
+  <% if like_room?(@resource) %>
+    <%= link_to 'お気に入りに登録済', user_controll_room_path(@user_controll_room, room_id: @resource.id), method: :DELETE, class: 'btn btn-default', style: 'width:100%;' %>
+  <% else %>
+    <%= link_to 'お気に入り登録', user_controll_rooms_path(room_id: @resource.id), method: :post, class: 'btn btn-primary', style: 'width:100%;' %>
+  <% end %>
+</div>
+
 <%= render partial: 'chat_room', locals: { resource: @resource, messages: @messages } %>
 <%= render partial: 'documents/add_document', locals: { resource: @resource } %>
 <%= render partial: 'documents/documents_table' %>

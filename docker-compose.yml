@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: postgres:10.4
+    volumes:
+      - ./psql-data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+
+  web:
+    build: .
+    volumes:
+      - ".:/file_management_app"
+    ports:
+      - "3000:3000"
+    tty: true
+    depends_on:
+      - db

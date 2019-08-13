@@ -1,18 +1,26 @@
 version: '3'
 services:
+  web:
+    environment:
+      RAILS_ENV: development
+      TZ: Asia/Tokyo
+    build: .
+    volumes:
+      - ".:/usr/src/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
   db:
     image: postgres:10.4
     volumes:
-      - ./psql-data:/var/lib/postgresql/data
+      - psql-data:/var/lib/postgresql
+      - "./log/postgresql:/var/log/postgresql"
     ports:
       - "5432"
-
-  web:
-    build: .
-    volumes:
-      - ".:/file_management_app"
-    ports:
-      - "3000:3000"
-    tty: true
-    depends_on:
-      - db
+volumes:
+  psql-data:
+    driver: local

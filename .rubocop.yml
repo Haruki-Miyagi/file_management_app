@@ -1,6 +1,8 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.6.0
   Exclude:
     - vendor/bundle/**/*
     - db/migrate/**/*
@@ -8,6 +10,7 @@ AllCops:
     - db/**/*
     - config/**/*
     - Gemfile
+
 Rails:
   Enabled: true
 

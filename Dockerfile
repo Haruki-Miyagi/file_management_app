@@ -1,13 +1,27 @@
 FROM ruby:2.5.0
+ENV APP_ROOT /usr/src/app
+ENV BUILD_PACKAGES="nodejs postgresql-client vim"
 
-RUN apt-get update -qq && \
-    apt-get install -y nodejs postgresql-client build-essential libpq-dev
+WORKDIR $APP_ROOT
 
-RUN mkdir /file_management_app
-WORKDIR /file_management_app
+RUN \
+  apt-get update -qq && apt-get install -y $BUILD_PACKAGES --no-install-recommends && \
+  apt-get clean && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/*
 
-COPY Gemfile /file_management_app/Gemfile
-COPY Gemfile.lock /file_management_app/Gemfile.lock
-RUN bundle install
+COPY Gemfile $APP_ROOT/
+COPY Gemfile.lock $APP_ROOT/
+RUN \
+  echo 'gem: --no-document' >> ~/.gemrc && \
+  cp ~/.gemrc /etc/gemrc && \
+  chmod uog+r /etc/gemrc && \
+  bundle config build.nokogiri --use-system-libraries && \
+  bundle config jobs 4 && \
+  bundle install && \
+  rm -rf ~/.gem
 
-COPY . /file_management_app
+COPY . $APP_ROOT/
+
+RUN mkdir -p log
+
+EXPOSE 3000
+# CMD ["rails", "server", "-b", "0.0.0.0"]

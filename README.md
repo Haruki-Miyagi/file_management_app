@@ -40,9 +40,9 @@ L グループ(科目)単位でファイルを管理しチャット機能をつ�
 |:-----------|------------:|:------------:|
 | id         |integer      |_             |
 | email      |string       |_             |
-|password    |string    |_             |
+|password    |string       |_             |
 |admin       |boolean      |_             |
-| created_at |datetime     |_             |
+|created_at  |datetime     |_             |
 |updated_at  |datetime     |_             |
 
 #### folderテーブル
@@ -76,13 +76,13 @@ L グループ(科目)単位でファイルを管理しチャット機能をつ�
 
 
 #### documentテーブル
-|カラム        |型           |備考                          |
-|:----------- |------------:|:---------------------------:|
-|file_name    |string       |null: false, index: true     |
-|uploaded_file|string       |null: false                  |
-|description  |text         |index: true                  |
-|user_id     |references   |index: true, foreign_key: true|
-|room_id     |references   |index: true, foreign_key: true|
+|カラム        |型           |備考                           |
+|:----------- |------------:|:----------------------------:|
+|file_name    |string       |null: false, index: true      |
+|uploaded_file|string       |null: false                   |
+|description  |text         |index: true                   |
+|user_id      |references   |index: true, foreign_key: true|
+|room_id      |references   |index: true, foreign_key: true|
 
 * 誰がファイル管理フォルダを作成したか(作成したuserと関連づいている)
 * ファイル管理用
@@ -90,7 +90,7 @@ L グループ(科目)単位でファイルを管理しチャット機能をつ�
   * L フォルダと同様
 * ファイルのダウンロード
 
-#### messageテーブル(チャットのメッセージ)
+#### messagesテーブル(チャットのメッセージ)
 |カラム       |型            |備考                          |
 |:-----------|------------:|:----------------------------:|
 |content     |string       |null: false                   |
@@ -99,3 +99,11 @@ L グループ(科目)単位でファイルを管理しチャット機能をつ�
 
 * チャットで使用する
   * L Actioncableを利用してリアルタイムチャットにする
+
+#### user_controll_roomsテーブル(お気に入り登録)
+|カラム       |型            |備考                          |
+|:-----------|------------:|:----------------------------:|
+|user_id     |references   |index: true, foreign_key: true|
+|room_id     |references   |index: true, foreign_key: true|
+
+* お気に入り登録の中間テーブル
